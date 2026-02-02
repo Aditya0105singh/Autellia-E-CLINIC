@@ -367,8 +367,8 @@ export function MedicalReportsEnhanced() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl mb-2">Medical Reports</h1>
-          <p className="text-muted-foreground">Upload, view, and get AI-powered explanations of your medical reports</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Medical Reports</h1>
+          <p className="text-blue-800/80">Upload, view, and get AI-powered explanations of your medical reports</p>
         </div>
       </div>
 

@@ -86,14 +86,14 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
   ];
 
   return (
-    <div className="fixed inset-0 z-50 bg-gradient-to-br from-pink-50 via-white to-purple-50">
+    <div className="fixed inset-0 z-50 bg-gradient-to-br from-blue-50 via-white to-teal-50">
       {/* Waiting Room */}
       {callStatus === 'waiting' && (
         <div className="min-h-screen flex items-center justify-center p-6">
           <div className="max-w-2xl w-full">
             <div className="bg-white rounded-3xl shadow-2xl p-8">
               <div className="text-center mb-8">
-                <div className="inline-block bg-gradient-to-r from-pink-600 to-purple-600 p-4 rounded-2xl mb-4">
+                <div className="inline-block bg-gradient-to-r from-blue-600 to-teal-600 p-4 rounded-2xl mb-4">
                   <Video className="w-16 h-16 text-white" />
                 </div>
                 <h1 className="text-3xl mb-2">Virtual Waiting Room</h1>
@@ -101,7 +101,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
               </div>
 
               {/* Appointment Details */}
-              <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-2xl p-6 mb-6">
+              <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-6 mb-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Doctor</p>
@@ -165,7 +165,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
 
               <button
                 onClick={startCall}
-                className="w-full py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-xl text-lg hover:shadow-2xl transition-all flex items-center justify-center"
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-xl text-lg hover:shadow-2xl transition-all flex items-center justify-center"
               >
                 <Video className="w-6 h-6 mr-2" />
                 Join Consultation
@@ -179,7 +179,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
       {callStatus === 'connecting' && (
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <div className="w-24 h-24 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <div className="w-24 h-24 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
               <Video className="w-12 h-12 text-white" />
             </div>
             <h2 className="text-2xl text-white mb-2">Connecting...</h2>
@@ -217,7 +217,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
             <div className="col-span-2 relative bg-gray-950 rounded-2xl overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <div className="w-32 h-32 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <User className="w-16 h-16" />
                   </div>
                   <p className="text-xl">Dr. Priya Sharma</p>
@@ -235,7 +235,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
               <div className="relative bg-gray-950 rounded-2xl overflow-hidden aspect-video">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-2">
                       <User className="w-10 h-10" />
                     </div>
                     <p className="text-sm">You</p>
@@ -317,7 +317,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
                 className="p-4 rounded-full bg-gray-700 hover:bg-gray-600 transition-all relative"
               >
                 <MessageSquare className="w-6 h-6 text-white" />
-                <span className="absolute top-1 right-1 w-3 h-3 bg-pink-500 rounded-full" />
+                <span className="absolute top-1 right-1 w-3 h-3 bg-blue-500 rounded-full" />
               </button>
 
               <button
@@ -333,7 +333,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
           {/* Chat Sidebar */}
           {showChat && (
             <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl flex flex-col z-50">
-              <div className="bg-gradient-to-r from-pink-600 to-purple-600 p-4 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-blue-600 to-teal-600 p-4 flex items-center justify-between">
                 <h3 className="text-white">Chat</h3>
                 <button onClick={() => setShowChat(false)}>
                   <X className="w-5 h-5 text-white" />
@@ -345,7 +345,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
                   <div key={msg.id} className={`flex ${msg.sender === 'patient' ? 'justify-end' : 'justify-start'}`}>
                     <div className={`max-w-[70%] ${
                       msg.sender === 'patient' 
-                        ? 'bg-pink-100' 
+                        ? 'bg-blue-100' 
                         : 'bg-gray-100'
                     } rounded-2xl p-3`}>
                       <p className="text-sm">{msg.text}</p>
@@ -365,11 +365,11 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
                     onChange={(e) => setChatMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                     placeholder="Type a message..."
-                    className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <button
                     onClick={sendMessage}
-                    className="p-2 bg-pink-600 hover:bg-pink-700 rounded-xl transition-all"
+                    className="p-2 bg-blue-600 hover:bg-blue-700 rounded-xl transition-all"
                   >
                     <Send className="w-5 h-5 text-white" />
                   </button>
@@ -382,7 +382,7 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
 
       {/* Call Ended */}
       {callStatus === 'ended' && (
-        <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-pink-50 via-white to-purple-50">
+        <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-blue-50 via-white to-teal-50">
           <div className="max-w-2xl w-full">
             <Card className="p-8 text-center">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -394,15 +394,15 @@ export function TelemedicineConsultationEnhanced({ onClose, appointmentId }: Tel
               <div className="bg-muted rounded-2xl p-6 mb-6">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <p className="text-2xl text-pink-600">{formatTime(consultationTime)}</p>
+                    <p className="text-2xl text-blue-600">{formatTime(consultationTime)}</p>
                     <p className="text-sm text-muted-foreground">Duration</p>
                   </div>
                   <div>
-                    <p className="text-2xl text-pink-600">{messages.length}</p>
+                    <p className="text-2xl text-blue-600">{messages.length}</p>
                     <p className="text-sm text-muted-foreground">Messages</p>
                   </div>
                   <div>
-                    <p className="text-2xl text-pink-600">✓</p>
+                    <p className="text-2xl text-blue-600">✓</p>
                     <p className="text-sm text-muted-foreground">Completed</p>
                   </div>
                 </div>

@@ -199,11 +199,11 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
   ];
 
   const departmentRevenue = [
-    { name: "Cardiology", value: 35, amount: 857500, color: "#ec4899", patients: 145 },
-    { name: "Orthopedics", value: 25, amount: 612500, color: "#8b5cf6", patients: 98 },
-    { name: "General", value: 20, amount: 490000, color: "#3b82f6", patients: 185 },
-    { name: "Pediatrics", value: 12, amount: 294000, color: "#10b981", patients: 76 },
-    { name: "Others", value: 8, amount: 196000, color: "#f59e0b", patients: 42 }
+    { name: "Cardiology", value: 35, amount: 857500, color: "#0891b2", patients: 145 },
+    { name: "Orthopedics", value: 25, amount: 612500, color: "#0e7490", patients: 98 },
+    { name: "General", value: 20, amount: 490000, color: "#0369a1", patients: 185 },
+    { name: "Pediatrics", value: 12, amount: 294000, color: "#075985", patients: 76 },
+    { name: "Others", value: 8, amount: 196000, color: "#0c4a6e", patients: 42 }
   ];
 
   const doctors = [
@@ -635,8 +635,8 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
                     <p className="text-3xl mt-1">{overviewStats.totalDoctors}</p>
                     <p className="text-sm text-green-600 mt-1">{overviewStats.activeStaff} staff active</p>
                   </div>
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Stethoscope className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Stethoscope className="w-6 h-6 text-blue-600" />
                   </div>
                 </div>
               </Card>
@@ -661,8 +661,8 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
                     <p className="text-3xl mt-1">₹{(overviewStats.todayRevenue / 1000).toFixed(0)}K</p>
                     <p className="text-sm text-muted-foreground mt-1">Monthly: ₹{(overviewStats.monthlyRevenue / 100000).toFixed(1)}L</p>
                   </div>
-                  <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                    <DollarSign className="w-6 h-6 text-pink-600" />
+                  <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+                    <DollarSign className="w-6 h-6 text-teal-600" />
                   </div>
                 </div>
               </Card>

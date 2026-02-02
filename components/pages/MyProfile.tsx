@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 import { Card } from "../ui/card";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -150,10 +150,10 @@ export function MyProfile({ user }: MyProfileProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl mb-2">My Profile</h1>
-          <p className="text-muted-foreground">Manage your personal information and medical records</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">My Profile</h1>
+          <p className="text-blue-800/80">Manage your personal information and medical records</p>
         </div>
-        <Button onClick={generateAIHealthSummary} variant="outline" className="gap-2">
+        <Button onClick={generateAIHealthSummary} className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all duration-200 transform hover:scale-105">
           <Brain className="w-4 h-4" />
           Generate AI Health Summary
         </Button>

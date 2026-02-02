@@ -106,7 +106,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                 <span>Medicine</span>
               </Button>
               <Button variant="outline" className="h-auto py-3 px-6 flex items-center gap-2">
-                <Heart className="w-5 h-5 text-pink-600" />
+                <Heart className="w-5 h-5 text-blue-600" />
                 <span>Healthcare</span>
               </Button>
               <Button variant="outline" className="h-auto py-3 px-6 flex items-center gap-2">
@@ -114,15 +114,15 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                 <span>Doctor Consult</span>
               </Button>
               <Button variant="outline" className="h-auto py-3 px-6 flex items-center gap-2">
-                <TestTube className="w-5 h-5 text-purple-600" />
+                <TestTube className="w-5 h-5 text-blue-600" />
                 <span>Lab Tests</span>
               </Button>
               <Button variant="outline" className="h-auto py-3 px-6 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-yellow-600" />
+                <Sparkles className="w-5 h-5 text-teal-600" />
                 <span>PLUS</span>
               </Button>
               <Button variant="outline" className="h-auto py-3 px-6 flex items-center gap-2">
-                <Gift className="w-5 h-5 text-orange-600" />
+                <Gift className="w-5 h-5 text-blue-600" />
                 <span>Health Insights</span>
               </Button>
             </div>
@@ -130,7 +130,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* AI Symptom Checker */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <Brain className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">AI Symptom Checker</h3>
@@ -142,7 +142,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
               {/* Voice Input */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <Mic className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">Voice-to-Text</h3>
@@ -157,7 +157,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
               {/* Report Explainer */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">Report Explainer</h3>
@@ -172,7 +172,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
               {/* Audio Summary */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <Volume2 className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">Audio Summary</h3>
@@ -187,7 +187,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
               {/* X-Ray Analysis */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <Activity className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">X-Ray & Scan Analysis</h3>
@@ -202,7 +202,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
               {/* Health Insights */}
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="mb-2">Health Insights</h3>
@@ -229,9 +229,9 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                 <Button className="w-full">Analyze Symptoms</Button>
                 
                 {/* Sample Result */}
-                <div className="p-4 bg-pink-50 rounded-lg border border-pink-200">
+                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-pink-600 mt-0.5" />
+                    <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="text-sm mb-2">
                         <strong>AI Analysis:</strong> Based on your symptoms, you may have a common viral infection. 
@@ -282,7 +282,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                     <p className="text-sm text-muted-foreground mb-1">Health Score</p>
                     <p className="text-3xl text-green-600">85%</p>
                   </div>
-                  <Heart className="w-8 h-8 text-red-600 opacity-20" />
+                  <Heart className="w-8 h-8 text-blue-600 opacity-20" />
                 </div>
               </Card>
               <Card className="p-6">
@@ -291,7 +291,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                     <p className="text-sm text-muted-foreground mb-1">Pending Bills</p>
                     <p className="text-3xl">₹1,450</p>
                   </div>
-                  <CreditCard className="w-8 h-8 text-orange-600 opacity-20" />
+                  <CreditCard className="w-8 h-8 text-teal-600 opacity-20" />
                 </div>
               </Card>
             </div>

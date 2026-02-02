@@ -149,10 +149,10 @@ export function MyAppointments({ onBookAppointment }: MyAppointmentsProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl mb-2">My Appointments</h1>
-          <p className="text-muted-foreground">Manage and track all your appointments</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">My Appointments</h1>
+          <p className="text-blue-800/80">Manage and track all your appointments</p>
         </div>
-        <Button onClick={() => setShowBooking(true)} className="gap-2">
+        <Button onClick={() => setShowBooking(true)} className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all duration-200 transform hover:scale-105">
           <Plus className="w-4 h-4" />
           Book New Appointment
         </Button>

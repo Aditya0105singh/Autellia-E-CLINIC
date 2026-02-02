@@ -3,7 +3,7 @@ import { Footer } from "./Footer";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { PageView } from "../App";
-import { Building2, Stethoscope, UserPlus, Calendar, Video, FlaskConical, TrendingUp, CheckCircle, ArrowRight, Users, Clock, Shield, Star, Zap, Award } from "lucide-react";
+import { Building2, Stethoscope, UserPlus, Calendar, Video, FlaskConical, TrendingUp, CheckCircle, ArrowRight, Users, Clock, Shield, Star, Zap, Award, Play } from "lucide-react";
 import { MedicineSection } from "./MedicineSection";
 
 interface HowItWorksProps {
@@ -57,47 +57,48 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background font-sans">
       <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} />
-      
+
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 py-20 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl mb-6 text-foreground font-bold">How E-Clinic Works</h1>
-          <p className="text-xl text-foreground/80 max-w-3xl mx-auto font-medium">
-            From registration to continuous care - see how E-Clinic transforms the healthcare journey
+      <section className="relative pt-20 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-100 dark:bg-pink-900/30 rounded-full blur-3xl opacity-60 -mr-20 -mt-20"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h1 className="text-5xl lg:text-6xl mb-6 text-foreground font-bold tracking-tight">How <span className="text-pink-500">E-Clinic</span> Works</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
+            From registration to continuous care - a seamless journey for clinics, doctors, and patients.
           </p>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-card dark:bg-background">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             {/* Vertical line */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-pink-200" />
-            
-            <div className="space-y-12">
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-pink-100 dark:bg-pink-900/20" />
+
+            <div className="space-y-16">
               {steps.map((step, index) => (
                 <div key={index} className="relative">
                   {/* Step number circle */}
-                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-pink-600 text-white rounded-full items-center justify-center z-10">
+                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-14 h-14 bg-white dark:bg-slate-800 border-4 border-pink-100 dark:border-pink-900/20 text-pink-600 dark:text-pink-400 rounded-full items-center justify-center z-10 shadow-sm font-bold text-xl">
                     {index + 1}
                   </div>
-                  
+
                   {/* Content card */}
-                  <div className={`md:w-5/12 ${index % 2 === 0 ? 'md:ml-auto md:pl-16' : 'md:pr-16'}`}>
-                    <Card className="p-6 hover:shadow-xl transition-shadow">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <step.icon className="w-6 h-6 text-pink-600" />
+                  <div className={`md:w-5/12 ${index % 2 === 0 ? 'md:ml-auto md:pl-20' : 'md:pr-20'}`}>
+                    <Card className="p-8 hover:shadow-2xl transition-all duration-300 border-slate-100 dark:border-border bg-card group rounded-2xl">
+                      <div className="flex items-center gap-5 mb-5">
+                        <div className="w-14 h-14 bg-pink-50 dark:bg-pink-900/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+                          <step.icon className="w-7 h-7 text-pink-500 group-hover:text-white transition-colors duration-300" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="mb-1">{step.title}</h3>
-                          <p className="text-sm text-pink-600">{step.description}</p>
+                          <h3 className="mb-1 text-xl font-bold text-foreground">{step.title}</h3>
+                          <p className="text-sm text-pink-500 dark:text-pink-400 font-bold uppercase tracking-wide">{step.description}</p>
                         </div>
                       </div>
-                      <p className="text-muted-foreground">{step.details}</p>
+                      <p className="text-muted-foreground leading-relaxed font-medium">{step.details}</p>
                     </Card>
                   </div>
                 </div>
@@ -108,108 +109,108 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
       </section>
 
       {/* Video/Demo Section */}
-      <section className="py-20 bg-gradient-to-br from-pink-900/10 to-purple-900/10 border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl mb-6 text-foreground font-bold">See It In Action</h2>
-          <p className="text-xl text-foreground/80 mb-8 font-medium">
-            Watch how E-Clinic simplifies healthcare management
+      <section className="py-24 bg-slate-900 dark:bg-black overflow-hidden relative">
+        <div className="absolute inset-0 bg-pink-600/10"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl mb-6 text-white font-bold">See It In Action</h2>
+          <p className="text-xl text-slate-300 mb-10 font-medium max-w-2xl mx-auto">
+            Watch our comprehensive walkthrough to see how simplified healthcare management can be.
           </p>
-          <Card className="overflow-hidden shadow-2xl aspect-video bg-gray-900 flex items-center justify-center">
-            <Button size="lg" variant="secondary">
-              <Video className="w-5 h-5 mr-2" />
-              Watch Demo Video
-            </Button>
+          <Card className="overflow-hidden shadow-2xl aspect-video bg-slate-800 dark:bg-slate-900 flex items-center justify-center border-slate-700/50 rounded-3xl group cursor-pointer hover:border-pink-500/50 transition-colors">
+            <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 border border-white/20">
+              <Play className="w-8 h-8 text-white fill-white ml-1" />
+            </div>
           </Card>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-pink-50 dark:bg-slate-950/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Why Choose E-Clinic?</h2>
-            <p className="text-xl text-muted-foreground">The complete healthcare platform trusted by thousands</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl mb-4 text-foreground font-bold">Why Choose E-Clinic?</h2>
+            <p className="text-xl text-muted-foreground font-medium">The complete healthcare platform trusted by thousands</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 dark:group-hover:bg-green-900/30 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Easy Registration</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Easy Registration</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     Quick and simple onboarding process for clinics, doctors, and patients
                   </p>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Video className="w-6 h-6 text-blue-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors">
+                  <Video className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Seamless Consultations</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Seamless Consultations</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     High-quality video calls with integrated AI note-taking
                   </p>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <TrendingUp className="w-6 h-6 text-purple-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 transition-colors">
+                  <TrendingUp className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Smart Analytics</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Smart Analytics</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     Data-driven insights to improve patient outcomes
                   </p>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <FlaskConical className="w-6 h-6 text-pink-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-pink-50 dark:bg-pink-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition-colors">
+                  <FlaskConical className="w-6 h-6 text-pink-600 dark:text-pink-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Integrated Services</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Integrated Services</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     Connected lab tests and pharmacy services
                   </p>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-6 h-6 text-orange-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-orange-50 dark:bg-orange-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-orange-100 dark:group-hover:bg-orange-900/30 transition-colors">
+                  <Calendar className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Automated Scheduling</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Automated Scheduling</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     Smart appointment management and reminders
                   </p>
                 </div>
               </div>
             </Card>
 
-            <Card className="p-6 hover:shadow-xl transition-all">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <ArrowRight className="w-6 h-6 text-teal-600" />
+            <Card className="p-8 hover:shadow-xl transition-all border-none bg-card shadow-sm group">
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 bg-teal-50 dark:bg-teal-900/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/30 transition-colors">
+                  <ArrowRight className="w-6 h-6 text-teal-600 dark:text-teal-400" />
                 </div>
                 <div>
-                  <h3 className="mb-2">Continuous Care</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="mb-2 font-bold text-foreground">Continuous Care</h3>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     Follow-ups and ongoing patient monitoring
                   </p>
                 </div>
@@ -220,72 +221,36 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-pink-900/10 to-purple-900/10 border-b border-border">
+      <section className="py-24 bg-card dark:bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-4xl mb-4 text-foreground font-bold">Trusted by Healthcare Leaders</h2>
-            <p className="text-xl text-muted-foreground">Real impact on healthcare delivery</p>
+            <p className="text-xl text-muted-foreground font-medium">Real impact on healthcare delivery</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <Users className="w-12 h-12 text-pink-600 mx-auto mb-4" />
-              <div className="text-4xl mb-2 text-pink-600">1000+</div>
-              <p className="text-muted-foreground">Doctors Onboarded</p>
+            <Card className="p-8 text-center hover:shadow-xl transition-all bg-secondary/30 border-none group">
+              <Users className="w-12 h-12 text-pink-500 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <div className="text-4xl font-bold mb-2 text-foreground">1000+</div>
+              <p className="text-muted-foreground font-bold">Doctors Onboarded</p>
             </Card>
 
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <Building2 className="w-12 h-12 text-pink-600 mx-auto mb-4" />
-              <div className="text-4xl mb-2 text-pink-600">250+</div>
-              <p className="text-muted-foreground">Partner Clinics</p>
+            <Card className="p-8 text-center hover:shadow-xl transition-all bg-secondary/30 border-none group">
+              <Building2 className="w-12 h-12 text-pink-500 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <div className="text-4xl font-bold mb-2 text-foreground">250+</div>
+              <p className="text-muted-foreground font-bold">Partner Clinics</p>
             </Card>
 
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <Video className="w-12 h-12 text-pink-600 mx-auto mb-4" />
-              <div className="text-4xl mb-2 text-pink-600">100K+</div>
-              <p className="text-muted-foreground">Consultations Done</p>
+            <Card className="p-8 text-center hover:shadow-xl transition-all bg-secondary/30 border-none group">
+              <Video className="w-12 h-12 text-pink-500 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <div className="text-4xl font-bold mb-2 text-foreground">100K+</div>
+              <p className="text-muted-foreground font-bold">Consultations Done</p>
             </Card>
 
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <Star className="w-12 h-12 text-pink-600 mx-auto mb-4" />
-              <div className="text-4xl mb-2 text-pink-600">4.9/5</div>
-              <p className="text-muted-foreground">Average Rating</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Platform Highlights</h2>
-            <p className="text-xl text-muted-foreground">Everything you need in one place</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 hover:shadow-lg transition-all">
-              <Zap className="w-10 h-10 text-yellow-600 mb-4" />
-              <h3 className="mb-2">Fast Setup</h3>
-              <p className="text-sm text-muted-foreground">Go live in under 10 minutes with guided onboarding</p>
-            </Card>
-
-            <Card className="p-6 hover:shadow-lg transition-all">
-              <Shield className="w-10 h-10 text-blue-600 mb-4" />
-              <h3 className="mb-2">Secure & Compliant</h3>
-              <p className="text-sm text-muted-foreground">HIPAA compliant with bank-level encryption</p>
-            </Card>
-
-            <Card className="p-6 hover:shadow-lg transition-all">
-              <Clock className="w-10 h-10 text-green-600 mb-4" />
-              <h3 className="mb-2">24/7 Availability</h3>
-              <p className="text-sm text-muted-foreground">Round-the-clock support and uptime</p>
-            </Card>
-
-            <Card className="p-6 hover:shadow-lg transition-all">
-              <Award className="w-10 h-10 text-purple-600 mb-4" />
-              <h3 className="mb-2">Award Winning</h3>
-              <p className="text-sm text-muted-foreground">Recognized for innovation in healthcare</p>
+            <Card className="p-8 text-center hover:shadow-xl transition-all bg-secondary/30 border-none group">
+              <Star className="w-12 h-12 text-pink-500 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <div className="text-4xl font-bold mb-2 text-foreground">4.9/5</div>
+              <p className="text-muted-foreground font-bold">Average Rating</p>
             </Card>
           </div>
         </div>
@@ -295,24 +260,31 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
       <MedicineSection onNavigate={onNavigate} />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-pink-600 to-purple-600 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl mb-4">Ready to Transform Your Practice?</h2>
-          <p className="text-xl mb-8 text-pink-100">
-            Join thousands of healthcare providers already using E-Clinic
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button size="lg" variant="secondary" onClick={() => onNavigate("login")}>
-              Get Started Now
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-transparent text-white border-white hover:bg-white/10"
-              onClick={() => onNavigate("contact")}
-            >
-              Contact Sales
-            </Button>
+      <section className="py-24 bg-card dark:bg-background border-t border-border">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-pink-600 rounded-[2.5rem] p-12 lg:p-16 text-center shadow-2xl shadow-pink-200 dark:shadow-pink-900/30 relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
+
+            <div className="relative z-10">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white tracking-tight">Ready to Transform Your Practice?</h2>
+              <p className="text-xl mb-10 text-white/90 font-medium max-w-2xl mx-auto">
+                Join thousands of healthcare providers already using E-Clinic to deliver better care.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Button size="lg" className="bg-white text-pink-600 hover:bg-pink-50 font-bold px-8 h-14 rounded-full shadow-lg" onClick={() => onNavigate("login")}>
+                  Get Started Now
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent text-white border-2 border-white/30 hover:bg-white/10 font-bold px-8 h-14 rounded-full"
+                  onClick={() => onNavigate("contact")}
+                >
+                  Contact Sales
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -92,8 +92,8 @@ export function MyBilling() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl mb-2">My Billing</h1>
-        <p className="text-muted-foreground">View your invoices and pay your bills securely online</p>
+        <h1 className="text-3xl font-bold text-blue-900 mb-2">My Billing</h1>
+        <p className="text-blue-800/80">View your invoices and pay your bills securely online</p>
       </div>
 
       {/* Search */}

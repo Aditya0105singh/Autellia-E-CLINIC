@@ -27,7 +27,7 @@ import { Offers } from "./components/Offers";
 import { Contact } from "./components/Contact";
 
 export type UserRole = "patient" | "doctor" | "clinic" | null;
-export type PageView = "home" | "login" | "dashboard" | "features" | "how-it-works" | "pricing" | "ai-features" | "medicine" | "cart" | "healthcare" | "doctor-consult" | "lab-tests" | "plus" | "health-insights" | "offers" | "contact" | "register-clinic" | "register-doctor" | "register-patient" | "clinic-module";
+export type PageView = "home" | "login" | "dashboard" | "features" | "how-it-works" | "pricing" | "ai-features" | "medicine" | "cart" | "healthcare" | "doctor-consult" | "lab-tests" | "plus" | "health-insights" | "offers" | "contact" | "register-clinic" | "register-doctor" | "register-patient" | "clinic-module" | "medical-reports";
 
 export interface User {
   id: string;
@@ -81,71 +81,71 @@ export default function App() {
     if (currentView === "home") {
       return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "login") {
       return <LoginWithOTP onLogin={handleLogin} onBack={() => setCurrentView("home")} onRegister={handleRegister} />;
     }
-    
+
     if (currentView === "register-clinic") {
       return <ClinicRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
     }
-    
+
     if (currentView === "register-doctor") {
       return <DoctorRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
     }
-    
+
     if (currentView === "cart") {
       return <CartPage onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
     }
-    
+
     if (currentView === "features") {
       return <Features onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "how-it-works") {
       return <HowItWorks onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "pricing") {
       return <Pricing onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "ai-features") {
       return <AIFeatures onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "medicine") {
       return <Medicine onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
     }
-    
+
     if (currentView === "healthcare") {
       return <Healthcare onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "doctor-consult") {
       return <DoctorConsult onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "lab-tests") {
       return <LabTests onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "plus") {
       return <Plus onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "health-insights") {
       return <HealthInsights onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "offers") {
       return <Offers onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "contact") {
       return <Contact onNavigate={navigateTo} />;
     }
-    
+
     if (currentView === "dashboard" && user) {
       switch (user.role) {
         case "patient":
@@ -158,15 +158,27 @@ export default function App() {
           return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
       }
     }
-    
+
     return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
   };
 
+  // Views that should be full width (not constrained by max-w-6xl)
+  const fullWidthViews: PageView[] = ["home", "features", "how-it-works", "pricing", "ai-features", "contact", "medicine", "healthcare"];
+  const isFullWidth = fullWidthViews.includes(currentView);
+
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background dark:bg-slate-950 text-foreground transition-colors duration-300">
         <CartProvider>
-          {renderView()}
+          {isFullWidth ? (
+            <main>
+              {renderView()}
+            </main>
+          ) : (
+            <main className="max-w-6xl mx-auto px-4 py-8">
+              {renderView()}
+            </main>
+          )}
           <Toaster />
         </CartProvider>
       </div>

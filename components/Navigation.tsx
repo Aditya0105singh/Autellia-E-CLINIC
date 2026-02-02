@@ -1,18 +1,18 @@
 import { Button } from "./ui/button";
-import { 
-  Heart, 
+import {
   ShoppingCart,
   Pill,
   FlaskConical,
   Stethoscope,
   Brain,
   Crown,
-  Tag,
   Menu,
-  X
+  X,
+  ChevronRight,
+  Heart
 } from "lucide-react";
 import { PageView } from "../App";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 interface NavigationProps {
@@ -23,198 +23,160 @@ interface NavigationProps {
 
 export function Navigation({ onNavigate, onGetStarted, cartCount = 0 }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const mainMenuItems = [
     { label: "Home", view: "home" as PageView },
     { label: "Features", view: "features" as PageView },
     { label: "How it Works", view: "how-it-works" as PageView },
     { label: "Pricing", view: "pricing" as PageView },
-    { label: "AI & Advanced Features", view: "ai-features" as PageView },
+    { label: "AI & Features", view: "ai-features" as PageView },
   ];
 
   const categoryItems = [
     { label: "Medicine", view: "medicine" as PageView, icon: Pill },
-    { label: "Healthcare", view: "healthcare" as PageView, icon: Heart },
     { label: "Doctor Consult", view: "doctor-consult" as PageView, icon: Stethoscope },
     { label: "Lab Tests", view: "lab-tests" as PageView, icon: FlaskConical },
-    { label: "PLUS", view: "plus" as PageView, icon: Crown },
     { label: "Health Insights", view: "health-insights" as PageView, icon: Brain },
-    { label: "Offers", view: "offers" as PageView, icon: Tag },
+    { label: "PLUS Membership", view: "plus" as PageView, icon: Crown },
   ];
 
   return (
-    <nav className="border-b border-border bg-background/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
+        ? "glass border-b border-border/40 py-2"
+        : "bg-transparent border-b border-transparent py-4"
+        }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Nav */}
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-2 cursor-pointer group" onClick={() => onNavigate("home")}> 
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-fuchsia-500 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
-              <Heart className="w-6 h-6 text-white animate-pulse" />
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <div
+            className="flex items-center gap-3 cursor-pointer group"
+            onClick={() => onNavigate("home")}
+          >
+            <div className="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200 group-hover:scale-105 transition-transform duration-300">
+              <Heart className="w-6 h-6 text-white fill-white" />
             </div>
-            <span className="text-xl text-foreground font-semibold group-hover:text-primary transition-colors duration-300">E-Clinic</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-heading font-bold text-foreground leading-none tracking-tight group-hover:text-pink-600 transition-colors">
+                E-Clinic
+              </span>
+            </div>
           </div>
-          
-          {/* Desktop Main Menu */}
-          <div className="hidden lg:flex items-center gap-6">
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex items-center gap-1">
             {mainMenuItems.map((item) => (
               <button
                 key={item.view}
                 onClick={() => onNavigate(item.view)}
-                className="relative group px-4 py-2 text-sm font-medium transition-all duration-300 ease-out"
+                className="px-4 py-2 text-sm font-bold text-muted-foreground hover:text-pink-600 transition-colors duration-200"
               >
-                <span className="relative z-10 text-foreground/90 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                  {item.label}
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                {item.label}
               </button>
             ))}
             <button
               onClick={() => onNavigate("contact")}
-              className="relative group px-4 py-2 text-sm font-medium transition-all duration-300 ease-out"
+              className="px-4 py-2 text-sm font-bold text-muted-foreground hover:text-pink-600 transition-colors duration-200"
             >
-              <span className="relative z-10 text-foreground/90 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                Contact
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+              Contact
             </button>
           </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <ThemeToggle />
-            <Button 
-              variant="ghost" 
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
+
+            <Button
+              variant="ghost"
               size="icon"
-              className="hidden sm:flex"
+              className="relative text-muted-foreground hover:text-pink-600 transition-colors"
             >
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ShoppingCart className="w-5 h-5" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-1 rounded-full">
+                <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
                   {cartCount}
                 </span>
               )}
             </Button>
-            <Button 
-              variant="ghost" 
-              onClick={() => onNavigate("login")}
-              className="hidden sm:flex"
-            >
-              Login
-            </Button>
-            {onGetStarted && (
-              <Button onClick={onGetStarted} className="hidden sm:flex">
+
+            <div className="hidden sm:flex items-center gap-2">
+              <Button
+                variant="ghost"
+                onClick={() => onNavigate("login")}
+                className="font-bold text-foreground hover:text-pink-600"
+              >
+                Login
+              </Button>
+              <Button
+                onClick={onGetStarted}
+                className="font-bold bg-pink-500 hover:bg-pink-600 text-white shadow-lg shadow-pink-200 transition-all duration-300 rounded-full px-6"
+              >
                 Get Started
               </Button>
-            )}
-            <Button 
-              variant="ghost" 
+            </div>
+
+            <Button
+              variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border shadow-lg z-50">
-            <div className="px-4 py-6 space-y-4">
-              {/* Main Menu Items */}
-              <div className="space-y-3">
-                {mainMenuItems.map((item) => (
-                  <button
-                    key={item.view}
-                    onClick={() => {
-                      onNavigate(item.view);
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-3 text-foreground/90 hover:text-primary hover:bg-accent rounded-lg transition-colors font-medium"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-                <button
-                  onClick={() => {
-                    onNavigate("contact");
-                    setMobileMenuOpen(false);
-                  }}
-                  className="w-full text-left px-4 py-3 text-foreground/90 hover:text-primary hover:bg-accent rounded-lg transition-colors font-medium"
-                >
-                  Contact
-                </button>
-              </div>
-              
-              {/* Divider */}
-              <div className="border-t border-border pt-4">
-                <div className="space-y-3">
-                  <button
-                    onClick={() => {
-                      onNavigate("login");
-                      setMobileMenuOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-3 text-foreground/90 hover:text-primary hover:bg-accent rounded-lg transition-colors font-medium"
-                  >
-                    Login
-                  </button>
-                  {onGetStarted && (
-                    <button
-                      onClick={() => {
-                        onGetStarted();
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg transition-colors font-medium"
-                    >
-                      Get Started
-                    </button>
-                  )}
-                </div>
-              </div>
-              
-              {/* Category Items */}
-              <div className="border-t border-border pt-4">
-                <div className="grid grid-cols-2 gap-2">
-                  {categoryItems.map((item) => (
-                    <button
-                      key={item.view}
-                      onClick={() => {
-                        onNavigate(item.view);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="flex items-center gap-2 px-3 py-2 text-foreground/80 hover:text-primary hover:bg-accent rounded-lg transition-colors"
-                    >
-                      <item.icon className="w-4 h-4" />
-                      <span className="text-xs font-medium">{item.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Category Navigation */}
-        <div className="border-t border-border hidden md:block bg-gradient-to-r from-secondary/50 to-secondary/30 backdrop-blur-sm">
-          <div className="flex items-center gap-4 sm:gap-6 py-2 sm:py-3 overflow-x-auto">
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-background/95 backdrop-blur-xl border-t border-border overflow-y-auto p-4 flex flex-col gap-4 animate-fade-in-up">
+          {mainMenuItems.map((item) => (
+            <button
+              key={item.view}
+              onClick={() => {
+                onNavigate(item.view);
+                setMobileMenuOpen(false);
+              }}
+              className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-950/30 text-foreground font-bold transition-colors"
+            >
+              {item.label}
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            </button>
+          ))}
+          <div className="h-px bg-border/50 my-2" />
+          <div className="grid grid-cols-2 gap-2">
             {categoryItems.map((item) => (
               <button
                 key={item.view}
-                onClick={() => onNavigate(item.view)}
-                className="relative group flex items-center gap-2 whitespace-nowrap px-3 sm:px-4 py-2 rounded-xl transition-all duration-300 ease-out hover:scale-105"
+                onClick={() => {
+                  onNavigate(item.view);
+                  setMobileMenuOpen(false);
+                }}
+                className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-secondary/30 hover:bg-pink-50 dark:hover:bg-pink-950/30 text-sm font-bold transition-colors group"
               >
-                <div className="relative z-10 flex items-center gap-2">
-                  <div className="w-4 h-4 text-foreground/70 group-hover:text-pink-600 transition-colors duration-300 group-hover:scale-110"></div>
-                  <span className="text-xs sm:text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors duration-300">{item.label}</span>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-600/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <item.icon className="w-5 h-5 text-pink-500 group-hover:scale-110 transition-transform" />
+                {item.label}
               </button>
             ))}
           </div>
+          <div className="h-px bg-border/50 my-2" />
+          <Button className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold" onClick={() => { onGetStarted && onGetStarted(); setMobileMenuOpen(false); }}>
+            Get Started
+          </Button>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

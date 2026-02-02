@@ -364,19 +364,17 @@ export function MedicalReportsEnhanced() {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl mb-2">Medical Reports</h1>
-          <p className="text-muted-foreground">Upload, view, and get AI-powered explanations of your medical reports</p>
-        </div>
-      </div>
+    <div className="space-y-10">
+      <header className="flex flex-col gap-1 mb-2">
+        <h1 className="text-3xl font-bold text-blue-900 mb-2">Medical Reports</h1>
+        <p className="text-blue-800/80">Upload, view, and get AI-powered explanations of your medical reports</p>
+      </header>
 
       {/* Upload Section */}
-      <Card className="p-6">
-        <div className="border-2 border-dashed rounded-lg p-8 text-center">
-          <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-          <p className="mb-4">Upload Medical Reports (PDF, JPG, PNG)</p>
+      <Card className="p-0 border-none shadow-none bg-transparent">
+        <div className="border border-dashed rounded-xl p-8 text-center bg-white/70">
+          <Upload className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
+          <p className="mb-2 text-base font-light">Upload Medical Reports (PDF, JPG, PNG)</p>
           <Input
             type="file"
             multiple
@@ -385,121 +383,121 @@ export function MedicalReportsEnhanced() {
             className="hidden"
             id="report-upload"
           />
-          <Button variant="outline" className="cursor-pointer" onClick={() => document.getElementById('report-upload')?.click()}>
+          <Button variant="ghost" className="cursor-pointer px-4 py-2 text-sm font-normal" onClick={() => document.getElementById('report-upload')?.click()}>
             Choose Files
           </Button>
-          <p className="text-sm text-muted-foreground mt-2">Max file size: 10MB per file</p>
+          <p className="text-xs text-muted-foreground mt-1">Max file size: 10MB per file</p>
         </div>
 
         {isUploading && (
-          <div className="mt-6">
+          <div className="mt-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm">Uploading reports...</span>
-              <span className="text-sm">{uploadProgress}%</span>
+              <span className="text-xs font-light">Uploading reports...</span>
+              <span className="text-xs font-light">{uploadProgress}%</span>
             </div>
-            <Progress value={uploadProgress} />
+            <Progress value={uploadProgress} className="h-1 bg-muted" />
           </div>
         )}
       </Card>
 
       {/* Search Bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <Input
           placeholder="Search reports by name, doctor, or type..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10"
+          className="pl-10 text-sm font-light bg-white/70 border border-muted rounded-lg focus:ring-0 focus:border-primary"
         />
       </div>
 
       {/* Stats */}
       <div className="grid md:grid-cols-4 gap-4">
-        <Card className="p-4">
-          <p className="text-sm text-muted-foreground mb-1">Total Reports</p>
-          <p className="text-2xl">{reports.length}</p>
-        </Card>
-        <Card className="p-4">
-          <p className="text-sm text-muted-foreground mb-1">This Month</p>
-          <p className="text-2xl text-blue-600">2</p>
-        </Card>
-        <Card className="p-4">
-          <p className="text-sm text-muted-foreground mb-1">AI Analyzed</p>
-          <p className="text-2xl text-purple-600">
-            {reports.filter(r => r.hasAIAnalysis).length}
-          </p>
-        </Card>
-        <Card className="p-4">
-          <p className="text-sm text-muted-foreground mb-1">Pending Review</p>
-          <p className="text-2xl text-orange-600">
-            {reports.filter(r => !r.hasAIAnalysis).length}
-          </p>
-        </Card>
+        <div className="rounded-lg bg-white/70 border border-muted p-4 flex flex-col items-center">
+          <span className="text-xs text-muted-foreground mb-1">Total Reports</span>
+          <span className="text-xl font-semibold">{reports.length}</span>
+        </div>
+        <div className="rounded-lg bg-white/70 border border-muted p-4 flex flex-col items-center">
+          <span className="text-xs text-muted-foreground mb-1">This Month</span>
+          <span className="text-xl font-semibold text-blue-600">2</span>
+        </div>
+        <div className="rounded-lg bg-white/70 border border-muted p-4 flex flex-col items-center">
+          <span className="text-xs text-muted-foreground mb-1">AI Analyzed</span>
+          <span className="text-xl font-semibold text-purple-600">{reports.filter(r => r.hasAIAnalysis).length}</span>
+        </div>
+        <div className="rounded-lg bg-white/70 border border-muted p-4 flex flex-col items-center">
+          <span className="text-xs text-muted-foreground mb-1">Pending Review</span>
+          <span className="text-xl font-semibold text-orange-600">{reports.filter(r => !r.hasAIAnalysis).length}</span>
+        </div>
       </div>
 
       {/* Reports Table */}
-      <Card>
+      <Card className="border-none shadow-none bg-transparent">
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>Report Name</TableHead>
-              <TableHead>Upload Date</TableHead>
-              <TableHead>Doctor</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>File</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+            <TableRow className="bg-white/60">
+              <TableHead className="font-light text-xs">Report Name</TableHead>
+              <TableHead className="font-light text-xs">Upload Date</TableHead>
+              <TableHead className="font-light text-xs">Doctor</TableHead>
+              <TableHead className="font-light text-xs">Type</TableHead>
+              <TableHead className="font-light text-xs">File</TableHead>
+              <TableHead className="text-right font-light text-xs">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredReports.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground text-sm font-light">
                   No reports found
                 </TableCell>
               </TableRow>
             ) : (
-              filteredReports.map((report) => (
-                <TableRow key={report.id}>
-                  <TableCell>
+              filteredReports.map((report, i) => (
+                <TableRow key={report.id} className={i % 2 === 0 ? "bg-white/50" : "bg-white/30"}>
+                  <TableCell className="py-2">
                     <div className="flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-blue-600" />
-                      <span className="font-medium">{report.name}</span>
+                      <FileText className="w-4 h-4 text-blue-400" />
+                      <span className="font-normal text-sm">{report.name}</span>
                     </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="py-2 text-xs text-muted-foreground font-light">
                     {format(new Date(report.uploadDate), "MMM dd, yyyy")}
                   </TableCell>
-                  <TableCell>{report.doctor}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{report.type}</Badge>
+                  <TableCell className="py-2 text-xs text-muted-foreground font-light">{report.doctor}</TableCell>
+                  <TableCell className="py-2">
+                    <Badge variant="outline" className="text-xs font-light border-muted bg-transparent">{report.type}</Badge>
                   </TableCell>
-                  <TableCell>
-                    <span className="text-sm text-muted-foreground">{report.fileSize}</span>
+                  <TableCell className="py-2 text-xs text-muted-foreground font-light">
+                    {report.fileSize}
                   </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex items-center justify-end gap-2">
+                  <TableCell className="text-right py-2">
+                    <div className="flex items-center justify-end gap-1">
                       <Button
                         variant="ghost"
-                        size="sm"
+                        size="icon"
                         onClick={() => generateAIExplanation(report)}
-                        className="gap-2"
+                        className="px-2"
+                        aria-label="AI Explain"
                       >
-                        <Brain className="w-4 h-4" />
-                        AI Explain
+                        <Brain className="w-4 h-4 text-purple-500" />
                       </Button>
                       <Button
                         variant="ghost"
-                        size="sm"
+                        size="icon"
                         onClick={() => handleView(report)}
+                        className="px-2"
+                        aria-label="View"
                       >
-                        <Eye className="w-4 h-4" />
+                        <Eye className="w-4 h-4 text-blue-400" />
                       </Button>
                       <Button
                         variant="ghost"
-                        size="sm"
+                        size="icon"
                         onClick={() => handleDownload(report)}
+                        className="px-2"
+                        aria-label="Download"
                       >
-                        <Download className="w-4 h-4" />
+                        <Download className="w-4 h-4 text-gray-400" />
                       </Button>
                     </div>
                   </TableCell>

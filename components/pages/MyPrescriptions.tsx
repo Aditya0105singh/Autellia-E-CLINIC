@@ -13,13 +13,13 @@ import {
   TableRow,
 } from "../ui/table";
 import { 
+  FileText, 
   Download, 
+  Search, 
   Eye, 
-  Trash2,
-  Printer,
-  MoreVertical,
-  Search,
-  FileText,
+  Trash2, 
+  Printer, 
+  MoreVertical, 
   Pill
 } from "lucide-react";
 import {
@@ -124,10 +124,10 @@ export function MyPrescriptions() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl mb-2">My Prescriptions</h1>
-          <p className="text-muted-foreground">Access, download, and manage all your electronic prescriptions</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">My Prescriptions</h1>
+          <p className="text-blue-800/80">Access, download, and manage all your electronic prescriptions</p>
         </div>
-        <Button onClick={handleExportAll} variant="outline" className="gap-2">
+        <Button onClick={handleExportAll} className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all duration-200 transform hover:scale-105">
           <Download className="w-4 h-4" />
           Export All
         </Button>
