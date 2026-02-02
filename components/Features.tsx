@@ -1,352 +1,285 @@
-import { Navigation } from "./Navigation";
-import { Footer } from "./Footer";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { PageView } from "../App";
-import { Video, Brain, TrendingUp, Activity, FlaskConical, CreditCard, Check, Zap, Shield, Clock, Users, Globe, Smartphone, Headphones, Lock, BarChart3, FileText, Calendar, Star } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { MedicineSection } from "./MedicineSection";
+import { Navigation } from "./Navigation";
+import { Footer } from "./Footer";
+import {
+    Video,
+    Beaker,
+    ShoppingBag,
+    Cloud,
+    Users,
+    UserRound,
+    Building2,
+    Stethoscope,
+    ArrowRight,
+    CheckCircle2,
+    Zap,
+    ShieldCheck,
+    Smartphone,
+    LayoutDashboard,
+    BrainCircuit,
+    PieChart
+} from "lucide-react";
+import type { PageView } from "../App";
+import { cn } from "./ui/utils";
 
 interface FeaturesProps {
-  onNavigate: (view: PageView) => void;
+    onNavigate: (view: PageView) => void;
 }
 
 export function Features({ onNavigate }: FeaturesProps) {
-  const features = [
-    {
-      icon: Video,
-      title: "Telemedicine",
-      description: "Secure video consults with waiting room & chat.",
-      whatToDo: "Book or start a video consult",
-      howToDoIt: ["Select doctor", "Choose \"Online\" slot", "Click \"Start Video\""],
-      image: "https://images.unsplash.com/photo-1758691461916-dc7894eb8f94?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBjb25zdWx0YXRpb24lMjB0ZWxlbWVkaWNpbmV8ZW58MXx8fHwxNzYyNjY4NjgxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      icon: Brain,
-      title: "AI Summarization",
-      description: "One-click patient summaries and smart notes.",
-      whatToDo: "Upload patient files or open a visit",
-      howToDoIt: ["Open visit", "Click \"Generate Summary\"", "Review & edit"],
-      image: "https://images.unsplash.com/photo-1758202292826-c40e172eed1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdGVjaG5vbG9neSUyMEFJfGVufDF8fHx8MTc2MjQzNjkyOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      icon: TrendingUp,
-      title: "Predictive Analytics",
-      description: "Risk scores, trends and proactive alerts.",
-      whatToDo: "Enable analytics for patient or clinic",
-      howToDoIt: ["Sync vitals/records", "Run analytics", "Receive risk alerts"],
-      image: "https://images.unsplash.com/photo-1695048441269-41b4d75351c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwYW5hbHl0aWNzJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjI2Njg2ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      icon: Activity,
-      title: "IoT Integration",
-      description: "Live vitals from wearables (HR, BP, glucose).",
-      whatToDo: "Connect a device",
-      howToDoIt: ["Go to Devices", "Pair device", "Start streaming"],
-      image: "https://images.unsplash.com/photo-1663354863388-9ced5806543a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwYW5hbHl0aWNzfGVufDF8fHx8MTc2MjMzNDI4Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      icon: FlaskConical,
-      title: "Lab & Pharmacy",
-      description: "Send lab orders & prescriptions to partners.",
-      whatToDo: "Order lab tests or send prescription",
-      howToDoIt: ["Create order from visit", "Choose partner", "Track status"],
-      image: "https://images.unsplash.com/photo-1599556147785-480f85376373?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYWJvcmF0b3J5JTIwbWVkaWNhbCUyMHRlc3RzfGVufDF8fHx8MTc2MjY0OTMyMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    },
-    {
-      icon: CreditCard,
-      title: "Payments & Billing",
-      description: "GST-ready invoices, Razorpay/Paytm support.",
-      whatToDo: "Generate invoice and accept payment",
-      howToDoIt: ["Issue invoice from visit", "Share payment link", "Mark paid"],
-      image: "https://images.unsplash.com/photo-1646392206581-2527b1cae5cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaGFybWFjeSUyMG1lZGljaW5lJTIwcGlsbHN8ZW58MXx8fHwxNzYyNjEzMzM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-    }
-  ];
+    const [activeRole, setActiveRole] = useState<"patient" | "doctor" | "clinic">("patient");
 
-  return (
-    <div className="min-h-screen">
-      <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-pink-900/20 to-purple-900/20 py-20 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge className="mb-6 bg-pink-600 text-white px-6 py-2">60+ Advanced Features</Badge>
-          <h1 className="text-5xl mb-6 text-foreground font-bold">Powerful Features for Modern Healthcare</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Everything you need to deliver exceptional patient care, streamline operations, and grow your practice
-          </p>
+    const coreModules = [
+        {
+            id: "telemedicine",
+            title: "Virtual Clinic",
+            icon: Video,
+            description: "HD secure video consultations with integrated digital prescriptions and real-time vital monitoring.",
+            gradient: "from-blue-500 to-cyan-400",
+            stats: "50k+ Consultations",
+            features: ["HD Video Calls", "Instant Chat", "Digital Rx"]
+        },
+        {
+            id: "pharmacy",
+            title: "Smart Pharmacy",
+            icon: ShoppingBag,
+            description: "Automated medicine ordering with AI-powered prescription scanning and 2-hour express delivery.",
+            gradient: "from-pink-500 to-rose-400",
+            stats: "10k+ Medicines",
+            features: ["AI OCR Scan", "Auto-Refill", "Cold Chain"]
+        },
+        {
+            id: "labs",
+            title: "Advanced Labs",
+            icon: Beaker,
+            description: "Book lab tests at home. Get smart reports with AI-driven trend analysis and longitudinal health tracking.",
+            gradient: "from-purple-500 to-indigo-400",
+            stats: "200+ Test Panels",
+            features: ["Home Sample", "Smart Reports", "Expert Review"]
+        },
+        {
+            id: "cloud",
+            title: "Health Cloud",
+            icon: Cloud,
+            description: "Secure, centralized EMR storage with blockchain-level encryption and universal patient identity.",
+            gradient: "from-emerald-500 to-teal-400",
+            stats: "99.9% Uptime",
+            features: ["Universal ID", "Encrypted EMR", "Fast Access"]
+        }
+    ];
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-            <div className="text-center">
-              <div className="text-4xl mb-2 text-pink-600">1000+</div>
-              <p className="text-muted-foreground">Active Doctors</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-2 text-pink-600">50K+</div>
-              <p className="text-muted-foreground">Patients Served</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-2 text-pink-600">95%</div>
-              <p className="text-muted-foreground">Satisfaction Rate</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl mb-2 text-pink-600">24/7</div>
-              <p className="text-muted-foreground">Support Available</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    const roleBenefits = {
+        patient: [
+            { icon: Smartphone, title: "Self-Service Portal", desc: "Manage appointments, reports, and bills from one app." },
+            { icon: Zap, title: "Instant Access", desc: "Book appointments or order medicines in under 60 seconds." },
+            { icon: ShieldCheck, title: "Privacy First", desc: "You own your data. Control who sees your medical history." }
+        ],
+        doctor: [
+            { icon: LayoutDashboard, title: "Smart Dashboard", desc: "Unified view of patient history, vitals, and reports." },
+            { icon: BrainCircuit, title: "Clinical Support", desc: "AI suggestions based on latest medical protocols." },
+            { icon: Stethoscope, title: "Virtual Practice", desc: "Expand your reach beyond physical boundaries." }
+        ],
+        clinic: [
+            { icon: Building2, title: "EMS Infrastructure", desc: "Complete clinic management system with billing & lab." },
+            { icon: PieChart, title: "Revenue Analytics", desc: "Detailed insights into clinic performance and trends." },
+            { icon: Users, title: "Patient Retention", desc: "Automated follow-ups and personalized engagement." }
+        ]
+    };
 
-      {/* Features List */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {features.map((feature, index) => (
-              <div key={index} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-2xl mb-6">
-                    <feature.icon className="w-8 h-8 text-pink-600" />
-                  </div>
-                  <h2 className="text-3xl mb-4">Feature {index + 1}: {feature.title}</h2>
-                  <p className="text-xl text-muted-foreground mb-6">{feature.description}</p>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="mb-3 text-pink-600">What to do:</h3>
-                      <p className="text-lg">{feature.whatToDo}</p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="mb-3 text-pink-600">How to do it:</h3>
-                      <ol className="space-y-2">
-                        {feature.howToDoIt.map((step, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <span className="flex items-center justify-center w-6 h-6 bg-pink-600 text-white rounded-full flex-shrink-0 text-sm">
-                              {idx + 1}
-                            </span>
-                            <span className="pt-0.5">{step}</span>
-                          </li>
+    return (
+        <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-pink-500/30">
+            <Navigation onNavigate={onNavigate} />
+
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-24 overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-to-b from-pink-500/10 via-transparent to-transparent -z-10 blur-[120px]"></div>
+
+                <div className="max-w-7xl mx-auto px-4 text-center">
+                    <Badge className="mb-6 px-6 py-2 bg-pink-500/10 text-pink-400 border-pink-500/20 rounded-full font-bold tracking-widest uppercase text-xs">
+                        Unified Healthcare OS
+                    </Badge>
+                    <h1 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-none text-white">
+                        Everything for <br /> <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent italic">Modern Care.</span>
+                    </h1>
+                    <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                        Autellia is a comprehensive ecosystem that bridges the gap between patients, healthcare providers, and diagnostic centers using cutting-edge technology.
+                    </p>
+                </div>
+            </section>
+
+            {/* Core Ecosystem Bento */}
+            <section className="py-24 max-w-7xl mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Main Large Card */}
+                    <Card className="md:col-span-2 md:row-span-2 p-12 bg-slate-900/50 border-white/5 relative overflow-hidden group rounded-[2.5rem]">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] -z-10 group-hover:bg-pink-500/20 transition-colors duration-700"></div>
+                        <div className="relative z-10 flex flex-col h-full">
+                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-400 flex items-center justify-center text-white mb-10 shadow-xl shadow-pink-500/20">
+                                <BrainCircuit className="w-8 h-8" />
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">Proactive <br /> Core Engine</h2>
+                            <p className="text-lg text-slate-400 leading-relaxed max-w-md mb-12">
+                                Our infrastructure isn't just a database—it's an intelligent layer that sits between all modules, ensuring data flows securely and provides value at every touchpoint.
+                            </p>
+
+                            <div className="mt-auto grid grid-cols-2 gap-8">
+                                <div>
+                                    <div className="text-4xl font-black text-white mb-1">99.9%</div>
+                                    <div className="text-sm font-bold text-slate-500 uppercase tracking-widest">Uptime Reliability</div>
+                                </div>
+                                <div>
+                                    <div className="text-4xl font-black text-white mb-1">256-bit</div>
+                                    <div className="text-sm font-bold text-slate-500 uppercase tracking-widest">AES Encryption</div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* Abstract UI Elements */}
+                        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 p-8 hidden lg:block">
+                            <div className="w-full h-full bg-slate-950/80 rounded-3xl border border-white/10 p-6 flex flex-col gap-4 animate-float">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                                    <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Network_Stability: Optimal</div>
+                                </div>
+                                <div className="space-y-2">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                                            <div className="h-full bg-pink-500/50" style={{ width: `${Math.random() * 60 + 40}%` }}></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </Card>
+
+                    {/* Individual Module Cards */}
+                    {coreModules.map((module) => (
+                        <Card key={module.id} className="p-8 bg-slate-900/40 border-white/5 hover:border-pink-500/30 transition-all duration-500 group rounded-[2rem] flex flex-col">
+                            <div className={cn(
+                                "w-12 h-12 rounded-xl flex items-center justify-center text-white mb-8 bg-gradient-to-br transition-transform group-hover:scale-110 duration-500",
+                                module.gradient
+                            )}>
+                                <module.icon className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-black text-white mb-3 tracking-tight">{module.title}</h3>
+                            <p className="text-sm text-slate-400 mb-8 leading-relaxed line-clamp-3">
+                                {module.description}
+                            </p>
+
+                            <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                                <div className="text-xs font-bold text-pink-500 uppercase tracking-wider">{module.stats}</div>
+                                <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-white transition-colors" />
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </section>
+
+            {/* Role-Based Benefits */}
+            <section className="py-32 bg-slate-900/20">
+                <div className="max-w-7xl mx-auto px-4 text-center">
+                    <h2 className="text-4xl md:text-5xl font-black text-white mb-16 tracking-tight">Tailored Experience</h2>
+
+                    <div className="inline-flex p-2 bg-slate-900 border border-white/5 rounded-2xl mb-20">
+                        {[
+                            { id: "patient", icon: UserRound, label: "Patients" },
+                            { id: "doctor", icon: Stethoscope, label: "Doctors" },
+                            { id: "clinic", icon: Building2, label: "Clinics" }
+                        ].map((role) => (
+                            <button
+                                key={role.id}
+                                onClick={() => setActiveRole(role.id as any)}
+                                className={cn(
+                                    "flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all",
+                                    activeRole === role.id ? "bg-pink-600 text-white shadow-lg shadow-pink-500/20" : "text-slate-400 hover:text-white"
+                                )}
+                            >
+                                <role.icon className="w-4 h-4" />
+                                {role.label}
+                            </button>
                         ))}
-                      </ol>
                     </div>
-                  </div>
 
-                  <Button size="lg" className="mt-8" onClick={() => onNavigate("login")}>
-                    Try This Feature
-                  </Button>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {roleBenefits[activeRole].map((benefit, i) => (
+                            <div key={i} className="text-left p-10 bg-slate-900 rounded-[2.5rem] border border-white/5 hover:border-pink-500/20 transition-colors animate-fade-in group">
+                                <div className="w-14 h-14 rounded-2xl bg-slate-950 flex items-center justify-center text-pink-500 mb-8 group-hover:scale-110 transition-transform">
+                                    <benefit.icon className="w-7 h-7" />
+                                </div>
+                                <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tight">{benefit.title}</h4>
+                                <p className="text-slate-400 font-medium leading-relaxed">{benefit.desc}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
+            </section>
 
-                <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <Card className="overflow-hidden shadow-2xl">
-                    <ImageWithFallback 
-                      src={feature.image}
-                      alt={feature.title}
-                      className="w-full h-auto"
-                    />
-                  </Card>
+            {/* Trust & Verification */}
+            <section className="py-32 max-w-7xl mx-auto px-4">
+                <div className="bg-gradient-to-br from-slate-900/80 to-slate-950 p-12 md:p-20 rounded-[4rem] border border-white/10 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-30"></div>
+
+                    <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
+                        <div className="flex-1 space-y-8">
+                            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">Secure by Design. <br /> Private by Default.</h2>
+                            <p className="text-lg text-slate-400 font-medium leading-relaxed">
+                                We believe healthcare data is sacred. That's why every byte of information in our ecosystem is encrypted and stored according to global HIPAA and GDPR standards.
+                            </p>
+                            <div className="flex flex-wrap gap-4">
+                                {["HIPAA COMPLIANT", "GDPR READY", "ISO 27001", "BLOCKCHAIN SECURED"].map((cert) => (
+                                    <Badge key={cert} className="px-4 py-2 bg-white/5 text-slate-400 border-white/10 rounded-lg text-[10px] font-black tracking-[0.2em]">
+                                        {cert}
+                                    </Badge>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex-1 grid grid-cols-2 gap-4">
+                            {[
+                                { title: "Universal ID", desc: "One identity across all clinics" },
+                                { title: "Consent Ledger", desc: "Transparent data access logs" },
+                                { title: "Instant Transfer", desc: "Move your records safely" },
+                                { title: "Verified Hub", desc: "All providers are audited" }
+                            ].map((item, i) => (
+                                <div key={i} className="p-6 bg-slate-950/50 rounded-3xl border border-white/5">
+                                    <CheckCircle2 className="w-5 h-5 text-pink-500 mb-4" />
+                                    <h5 className="font-black text-white mb-1 uppercase text-sm tracking-tight">{item.title}</h5>
+                                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* Benefits Grid */}
-      <section className="py-20 bg-gradient-to-br from-pink-900/10 to-purple-900/10 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4 text-foreground font-bold">Why Healthcare Providers Choose E-Clinic</h2>
-            <p className="text-xl text-muted-foreground">Join thousands of satisfied healthcare professionals</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <div className="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Zap className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl mb-3">Quick Setup</h3>
-              <p className="text-muted-foreground">
-                Get started in minutes with our intuitive onboarding process. No technical expertise required.
-              </p>
-            </Card>
-
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <div className="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Shield className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl mb-3">Secure & Compliant</h3>
-              <p className="text-muted-foreground">
-                HIPAA compliant with end-to-end encryption. Your patient data is always protected.
-              </p>
-            </Card>
-
-            <Card className="p-8 text-center hover:shadow-xl transition-all">
-              <div className="w-16 h-16 bg-purple-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Clock className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl mb-3">24/7 Support</h3>
-              <p className="text-muted-foreground">
-                Round-the-clock customer support to help you whenever you need assistance.
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Additional Features Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Complete Healthcare Management Suite</h2>
-            <p className="text-xl text-muted-foreground">All the tools you need in one integrated platform</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Users, title: "Patient Management", desc: "Complete patient records & history" },
-              { icon: Calendar, title: "Smart Scheduling", desc: "Automated appointment booking" },
-              { icon: FileText, title: "Digital Prescriptions", desc: "E-prescriptions with drug database" },
-              { icon: BarChart3, title: "Revenue Analytics", desc: "Track income & expenses" },
-              { icon: Globe, title: "Multi-location", desc: "Manage multiple clinics" },
-              { icon: Smartphone, title: "Mobile Apps", desc: "iOS & Android support" },
-              { icon: Lock, title: "Data Security", desc: "Bank-grade encryption" },
-              { icon: Headphones, title: "Expert Support", desc: "Dedicated account manager" }
-            ].map((item, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-pink-600" />
+            {/* CTA Section */}
+            <section className="py-24 max-w-7xl mx-auto px-4 text-center">
+                <div className="space-y-8">
+                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">Ready to evolve?</h2>
+                    <p className="text-xl text-slate-400 max-w-2xl mx-auto">Join the decentralized healthcare revolution today.</p>
+                    <div className="flex justify-center gap-6 pt-8">
+                        <Button
+                            size="lg"
+                            className="h-16 px-12 bg-pink-600 hover:bg-pink-700 text-white rounded-full font-black text-lg shadow-2xl shadow-pink-500/20 transition-all hover:scale-105"
+                            onClick={() => onNavigate("login")}
+                        >
+                            Get Started Free
+                        </Button>
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            className="h-16 px-12 border-2 border-white/10 hover:bg-white/5 text-white rounded-full font-black text-lg transition-all"
+                            onClick={() => onNavigate("how-it-works")}
+                        >
+                            Learn More
+                        </Button>
+                    </div>
                 </div>
-                <h3 className="mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </Card>
-            ))}
-          </div>
+            </section>
+
+            <Footer onNavigate={onNavigate} />
         </div>
-      </section>
-
-      {/* Integrations Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Seamless Integrations</h2>
-            <p className="text-xl text-muted-foreground">Connect with your existing tools and services</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8">
-              <h3 className="text-xl mb-4">Payment Gateways</h3>
-              <ul className="space-y-3">
-                {["Razorpay", "Paytm", "PhonePe", "Google Pay", "UPI", "Credit/Debit Cards"].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card className="p-8">
-              <h3 className="text-xl mb-4">Lab Partners</h3>
-              <ul className="space-y-3">
-                {["Thyrocare", "Dr. Lal PathLabs", "Metropolis", "SRL Diagnostics", "Apollo Diagnostics", "Vijaya Diagnostics"].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card className="p-8">
-              <h3 className="text-xl mb-4">Pharmacy Networks</h3>
-              <ul className="space-y-3">
-                {["Apollo Pharmacy", "MedPlus", "Netmeds", "1mg", "PharmEasy", "Local Pharmacies"].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4">Trusted by Healthcare Professionals</h2>
-            <p className="text-xl text-muted-foreground">See what doctors and clinics are saying</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Dr. Priya Sharma",
-                role: "Cardiologist, Mumbai",
-                content: "E-Clinic's AI features have transformed how I practice. Patient summaries save me 30 minutes per consultation!",
-                rating: 5
-              },
-              {
-                name: "Dr. Rajesh Kumar",
-                role: "Multi-Specialty Clinic Owner",
-                content: "Managing 15 doctors and 200+ daily patients is now seamless. The analytics help us optimize everything.",
-                rating: 5
-              },
-              {
-                name: "Dr. Anita Desai",
-                role: "Pediatrician, Delhi",
-                content: "The telemedicine feature is a game-changer. I can now reach patients in remote areas easily.",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
-                <div>
-                  <p className="font-semibold">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Medicine Section */}
-      <MedicineSection onNavigate={onNavigate} />
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-pink-600 to-purple-600 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl mb-4">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 text-pink-100">
-            Experience all these features with our free 30-day trial
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button size="lg" variant="secondary" onClick={() => onNavigate("login")}>
-              Start Free Trial
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="bg-transparent text-white border-white hover:bg-white/10"
-              onClick={() => onNavigate("pricing")}
-            >
-              View Pricing
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <Footer onNavigate={onNavigate} />
-    </div>
-  );
+    );
 }
