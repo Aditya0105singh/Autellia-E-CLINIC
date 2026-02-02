@@ -130,10 +130,10 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0 }: Navigati
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className="lg:hidden h-10 w-10 text-foreground"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
           </div>
         </div>
@@ -141,7 +141,11 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0 }: Navigati
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40 bg-background/95 backdrop-blur-xl border-t border-border overflow-y-auto p-4 flex flex-col gap-4 animate-fade-in-up">
+        <div className="lg:hidden fixed inset-0 top-[72px] z-40 bg-background/98 backdrop-blur-2xl border-t border-border overflow-y-auto p-4 flex flex-col gap-4 animate-fade-in-up">
+          <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-secondary/20 border border-border/50 mb-2">
+            <span className="text-sm font-bold text-foreground">Appearance</span>
+            <ThemeToggle />
+          </div>
           {mainMenuItems.map((item) => (
             <button
               key={item.view}
