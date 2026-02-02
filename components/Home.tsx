@@ -87,7 +87,7 @@ export function Home({ onGetStarted, onNavigate }: HomeProps) {
       <Navigation onGetStarted={onGetStarted} onNavigate={onNavigate} activeView="home" />
 
       {/* Hero Section */}
-      <section className="relative pt-12 pb-24 overflow-hidden">
+      <section className="relative pt-32 pb-24 overflow-hidden">
         {/* Soft Pink Background Blob */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[600px] h-[600px] bg-pink-100/50 dark:bg-pink-900/10 rounded-full blur-3xl -z-10 opacity-60"></div>
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[500px] h-[500px] bg-rose-100/40 dark:bg-rose-900/10 rounded-full blur-3xl -z-10 opacity-60"></div>
@@ -283,7 +283,7 @@ export function Home({ onGetStarted, onNavigate }: HomeProps) {
             <div className="relative z-10 space-y-8">
               <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground">Ready to get started?</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
-                Join thousands of users who trust Autellia for their healthcare needs.
+                Join thousands of users who trust E-Clinic for their healthcare needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="h-14 px-10 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full shadow-lg shadow-pink-200 dark:shadow-pink-900/20" onClick={onGetStarted}>

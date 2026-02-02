@@ -105,7 +105,7 @@ export function Features({ onNavigate }: FeaturesProps) {
                         Everything for <br /> <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent italic">Modern Care.</span>
                     </h1>
                     <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium px-4">
-                        Autellia is a comprehensive ecosystem that bridges the gap between patients, healthcare providers, and diagnostic centers using cutting-edge technology.
+                        E-Clinic is a comprehensive ecosystem that bridges the gap between patients, healthcare providers, and diagnostic centers using cutting-edge technology.
                     </p>
                 </div>
             </section>

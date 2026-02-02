@@ -62,46 +62,44 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div
-            className="flex items-center gap-3 cursor-pointer group relative"
+            className="flex items-center gap-3 cursor-pointer group"
             onClick={() => onNavigate("home")}
           >
-            <div className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-400 flex items-center justify-center shadow-lg shadow-pink-500/20 group-hover:scale-110 transition-all duration-500">
-              <Heart className="w-6 h-6 text-white fill-white animate-pulse" />
-              <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200 transition-transform group-hover:scale-105">
+              <Heart className="w-6 h-6 text-white fill-white" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-black text-slate-900 dark:text-white leading-none tracking-tighter group-hover:text-pink-500 transition-colors">
-                AUTELLIA
+            <div className="flex flex-col lg:flex-row lg:items-center lg:gap-2">
+              <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-pink-600 transition-colors">
+                E-CLINIC
               </span>
-              <span className="text-[10px] font-black text-pink-500/80 tracking-[0.3em] uppercase mt-1">E-Clinic OS</span>
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 bg-slate-100/50 dark:bg-slate-900/40 p-1.5 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md">
+          <div className="hidden lg:flex items-center gap-1">
             {mainMenuItems.map((item) => (
               <button
                 key={item.view}
                 onClick={() => onNavigate(item.view)}
                 className={cn(
-                  "px-5 py-2.5 text-xs font-black uppercase tracking-widest transition-all duration-300 rounded-xl relative group",
+                  "px-4 py-2 text-sm font-bold transition-all duration-200 rounded-lg relative",
                   activeView === item.view
-                    ? "bg-white dark:bg-slate-800 text-pink-600 shadow-sm"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "text-pink-600"
+                    : "text-muted-foreground hover:text-pink-600"
                 )}
               >
                 {item.label}
                 {activeView === item.view && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-pink-500 rounded-full"></span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-pink-500 rounded-full"></span>
                 )}
               </button>
             ))}
             <button
               onClick={() => onNavigate("contact")}
               className={cn(
-                "px-5 py-2.5 text-xs font-black uppercase tracking-widest transition-all duration-300 rounded-xl",
+                "px-4 py-2 text-sm font-bold transition-all duration-200 rounded-lg",
                 activeView === "contact"
-                  ? "bg-white dark:bg-slate-800 text-pink-600 shadow-sm"
-                  : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                  ? "text-pink-600"
+                  : "text-muted-foreground hover:text-pink-600"
               )}
             >
               Contact
@@ -155,12 +153,12 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
         </div>
       </div>
 
-      {/* Mobile Menu Overhaul */}
+      {/* Simplified Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-white/98 dark:bg-slate-950/98 backdrop-blur-3xl overflow-y-auto pt-24 px-6 animate-in fade-in slide-in-from-top duration-500">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between p-5 rounded-[2rem] bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 mb-6">
-              <span className="text-sm font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">Appearance</span>
+        <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-background/98 backdrop-blur-xl border-t border-border shadow-2xl animate-in slide-in-from-top-2 duration-300 overflow-y-auto max-h-[80vh]">
+          <div className="p-4 space-y-2">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-border mb-4">
+              <span className="text-xs font-bold text-muted-foreground">Appearance</span>
               <ThemeToggle />
             </div>
 
@@ -172,18 +170,18 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
                   setMobileMenuOpen(false);
                 }}
                 className={cn(
-                  "flex items-center justify-between p-6 rounded-[2rem] font-black uppercase tracking-[0.2em] text-sm transition-all",
+                  "flex items-center justify-between w-full p-4 rounded-xl font-bold text-sm transition-all",
                   activeView === item.view
-                    ? "bg-pink-500 text-white shadow-xl shadow-pink-500/20"
-                    : "hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-900 dark:text-white"
+                    ? "bg-pink-50 dark:bg-pink-900/10 text-pink-600"
+                    : "text-foreground hover:bg-slate-50 dark:hover:bg-slate-900"
                 )}
               >
                 {item.label}
-                <ChevronRight className={cn("w-5 h-5", activeView === item.view ? "text-white/50" : "text-pink-500")} />
+                <ChevronRight className={cn("w-4 h-4", activeView === item.view ? "text-pink-600" : "text-muted-foreground")} />
               </button>
             ))}
 
-            <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-border mt-4">
               {categoryItems.map((item) => (
                 <button
                   key={item.view}
@@ -191,12 +189,12 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
                     onNavigate(item.view);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex flex-col items-start gap-4 p-6 rounded-[2.5rem] bg-slate-100 dark:bg-slate-900/30 border border-slate-200 dark:border-white/5 hover:border-pink-500/50 transition-all group"
+                  className="flex flex-col items-start gap-2 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/30 border border-border hover:border-pink-500/50 transition-all group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center text-pink-500 shadow-sm group-hover:scale-110 transition-transform">
-                    <item.icon className="w-5 h-5" />
+                  <div className="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-500">
+                    <item.icon className="w-4 h-4" />
                   </div>
-                  <span className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white leading-tight">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">
                     {item.label}
                   </span>
                 </button>
@@ -204,7 +202,7 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
             </div>
 
             <Button
-              className="w-full h-18 mt-8 rounded-[2.5rem] bg-pink-600 hover:bg-pink-700 text-white font-black uppercase tracking-widest text-lg shadow-2xl shadow-pink-500/30 mb-20"
+              className="w-full h-12 mt-6 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold"
               onClick={() => { onGetStarted && onGetStarted(); setMobileMenuOpen(false); }}
             >
               Get Started

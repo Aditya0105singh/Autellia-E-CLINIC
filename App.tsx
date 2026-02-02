@@ -75,7 +75,7 @@ export default function App() {
   };
 
   const viewContent = (
-    <div key={currentView} className="animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+    <div key={currentView} className="animate-in fade-in duration-700 ease-out">
       {(() => {
         if (currentView === "home") {
           return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;

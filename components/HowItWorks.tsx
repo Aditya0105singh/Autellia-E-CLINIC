@@ -61,7 +61,7 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
       <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} activeView="how-it-works" />
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">
+      <section className="relative pt-32 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-100 dark:bg-pink-900/30 rounded-full blur-3xl opacity-60 -mr-20 -mt-20"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-5xl lg:text-6xl mb-6 text-foreground font-bold tracking-tight">How <span className="text-pink-500">E-Clinic</span> Works</h1>

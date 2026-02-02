@@ -6,7 +6,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Badge } from "./ui/badge";
 import { Toaster } from "./ui/sonner";
-import { 
+import {
   Home,
   User,
   Calendar,
@@ -227,14 +227,14 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                   </div>
                 </div>
                 <Button className="w-full">Analyze Symptoms</Button>
-                
+
                 {/* Sample Result */}
                 <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
                     <div>
                       <p className="text-sm mb-2">
-                        <strong>AI Analysis:</strong> Based on your symptoms, you may have a common viral infection. 
+                        <strong>AI Analysis:</strong> Based on your symptoms, you may have a common viral infection.
                         The AI suggests consulting a General Physician or an ENT Specialist.
                       </p>
                       <p className="text-xs text-muted-foreground mb-2">
@@ -310,7 +310,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                   </LineChart>
                 </ResponsiveContainer>
               </Card>
-              
+
               <Card className="p-6">
                 <h3 className="text-lg mb-4">Daily Steps</h3>
                 <ResponsiveContainer width="100%" height={200}>
@@ -383,7 +383,7 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
   return (
     <div className="min-h-screen bg-background">
       <Toaster />
-      
+
       {/* Top Navigation Bar */}
       <nav className="bg-white border-b sticky top-0 z-50">
         <div className="px-4 sm:px-6 lg:px-8">
@@ -397,12 +397,14 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
               >
                 {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </Button>
-              
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-white" />
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200">
+                  <Heart className="w-6 h-6 text-white fill-white" />
                 </div>
-                <span className="text-xl hidden sm:inline">E-Clinic</span>
+                <span className="text-xl font-bold text-slate-900 tracking-tight hidden sm:inline">
+                  E-CLINIC
+                </span>
               </div>
             </div>
 
@@ -443,9 +445,8 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className={`${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 fixed md:static inset-y-0 left-0 z-40 w-64 bg-white border-r transition-transform duration-300 ease-in-out mt-16 md:mt-0`}>
+        <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0 fixed md:static inset-y-0 left-0 z-40 w-64 bg-white border-r transition-transform duration-300 ease-in-out mt-16 md:mt-0`}>
           <nav className="p-4 space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -456,11 +457,10 @@ export function PatientDashboardNew({ user, onLogout }: PatientDashboardNewProps
                     setActivePage(item.id);
                     setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activePage === item.id
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${activePage === item.id
                       ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
                       : 'hover:bg-gray-100'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>

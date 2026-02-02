@@ -77,7 +77,7 @@ export function Pricing({ onNavigate }: PricingProps) {
       <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} activeView="pricing" />
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">
+      <section className="relative pt-32 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-100 dark:bg-pink-900/40 rounded-full blur-3xl opacity-60 -mr-20 -mt-20"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <Badge className="mb-6 bg-white dark:bg-slate-900 text-pink-600 dark:text-pink-400 px-4 py-1.5 shadow-sm border border-pink-100 dark:border-pink-900/30 font-bold tracking-wide">

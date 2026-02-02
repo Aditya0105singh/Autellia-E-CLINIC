@@ -272,7 +272,7 @@ export function MedicineEnhanced({ onNavigate, user, onLoginRequired }: Medicine
 
       {/* Sticky Category Nav */}
       <div className={cn(
-        "sticky top-0 z-40 transition-all duration-300 border-b",
+        "sticky top-[72px] z-40 transition-all duration-300 border-b",
         isScrolled
           ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-slate-200 dark:border-slate-800 py-4 shadow-lg"
           : "bg-transparent border-transparent py-6 -mt-32"

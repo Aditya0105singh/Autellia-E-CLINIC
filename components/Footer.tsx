@@ -24,7 +24,7 @@ export function Footer({ onNavigate }: FooterProps) {
               </div>
             </div>
             <p className="text-base leading-relaxed text-slate-500 dark:text-slate-400 font-medium">
-              Your health, our priority. Experience the future of digital healthcare with Autellia.
+              Your health, our priority. Experience the future of digital healthcare with E-Clinic.
             </p>
 
             {/* Social Links */}

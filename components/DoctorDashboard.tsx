@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Switch } from "./ui/switch";
-import { 
+import {
   Calendar,
   Heart,
   Users,
@@ -38,6 +38,7 @@ import {
   Send,
   Plus,
   X,
+  Menu,
   FileUp,
   FlaskConical,
   Package,
@@ -97,6 +98,7 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<any>(null);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Translations
   const translations = {
@@ -624,13 +626,20 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200">
+                  <Heart className="w-6 h-6 text-white fill-white" />
                 </div>
-                <span className="text-xl">E-Clinic</span>
+                <span className="text-xl font-bold text-slate-900 tracking-tight">
+                  E-CLINIC
+                </span>
               </div>
-              <nav className="hidden lg:flex gap-1">
+              <div className="h-8 w-px bg-slate-200 hidden md:block"></div>
+              <div className="hidden md:flex flex-col">
+                <span className="text-sm font-bold text-slate-700 max-w-[200px] truncate">{doctorProfile.clinicName}</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{doctorProfile.department}</span>
+              </div>
+              <nav className="hidden lg:flex gap-1 ml-4">
                 {[
                   { id: "dashboard", label: t.dashboard, icon: BarChart3 },
                   { id: "appointments", label: t.appointments, icon: Calendar },
@@ -649,6 +658,14 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
                   </Button>
                 ))}
               </nav>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="w-6 h-6" />
+              </Button>
             </div>
             <div className="flex items-center gap-3">
               {/* Language Toggle */}
@@ -707,6 +724,68 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
             </div>
           </div>
         </div>
+
+        {/* Mobile Sidebar */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-[60] lg:hidden">
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+            <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl flex flex-col p-6 animate-in slide-in-from-left duration-300">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-pink-500 flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-white fill-white" />
+                  </div>
+                  <span className="font-bold text-slate-900">E-CLINIC</span>
+                </div>
+                <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)}>
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+
+              <div className="space-y-2">
+                {[
+                  { id: "dashboard", label: t.dashboard, icon: BarChart3 },
+                  { id: "appointments", label: t.appointments, icon: Calendar },
+                  { id: "patients", label: t.patients, icon: Users },
+                  { id: "prescriptions", label: t.prescriptions, icon: Pill },
+                  { id: "analytics", label: t.analytics, icon: TrendingUp }
+                ].map(tab => (
+                  <Button
+                    key={tab.id}
+                    variant={activeTab === tab.id ? "secondary" : "ghost"}
+                    className="w-full justify-start text-sm"
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setSidebarOpen(false);
+                    }}
+                  >
+                    <tab.icon className="w-4 h-4 mr-3" />
+                    {tab.label}
+                  </Button>
+                ))}
+              </div>
+
+              <div className="mt-auto space-y-4">
+                <div className="p-3 bg-slate-50 rounded-xl">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={doctorProfile.avatar} />
+                      <AvatarFallback>D</AvatarFallback>
+                    </Avatar>
+                    <div className="overflow-hidden">
+                      <p className="text-xs font-bold truncate">{doctorProfile.fullName}</p>
+                      <p className="text-[10px] text-muted-foreground">Doctor</p>
+                    </div>
+                  </div>
+                  <Button variant="ghost" className="w-full justify-start text-xs h-8 text-red-600 hover:text-red-700 hover:bg-red-50" onClick={onLogout}>
+                    <LogOut className="w-3 h-3 mr-2" />
+                    Logout
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -870,8 +949,8 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
                             <p className="font-medium">₹{appointment.fee}</p>
                             <Badge className={
                               appointment.aiSummary.riskLevel === "High" ? "bg-red-100 text-red-700" :
-                              appointment.aiSummary.riskLevel === "Medium" ? "bg-orange-100 text-orange-700" :
-                              "bg-green-100 text-green-700"
+                                appointment.aiSummary.riskLevel === "Medium" ? "bg-orange-100 text-orange-700" :
+                                  "bg-green-100 text-green-700"
                             }>
                               {appointment.aiSummary.riskLevel} Risk
                             </Badge>
@@ -1667,8 +1746,8 @@ export function DoctorDashboard({ user, onLogout }: DoctorDashboardProps) {
                             </div>
                             <div className="flex gap-2">
                               <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div 
-                                  className="h-full bg-green-600" 
+                                <div
+                                  className="h-full bg-green-600"
                                   style={{ width: `${(disease.recovered / disease.count) * 100}%` }}
                                 />
                               </div>

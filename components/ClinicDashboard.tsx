@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Switch } from "./ui/switch";
-import { 
+import {
   Heart,
   Users,
   Calendar,
@@ -36,6 +36,7 @@ import {
   Trash2,
   Plus,
   X,
+  Menu,
   Send,
   Printer,
   Mail,
@@ -98,6 +99,7 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [showQueue, setShowQueue] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Translations
   const translations = {
@@ -485,16 +487,20 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-6 h-6 text-white" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center shadow-lg shadow-pink-200">
+                  <Heart className="w-6 h-6 text-white fill-white" />
                 </div>
-                <div>
-                  <span className="text-lg font-medium">{clinicProfile.clinicName}</span>
-                  <p className="text-xs text-muted-foreground">{clinicProfile.city}</p>
-                </div>
+                <span className="text-xl font-bold text-slate-900 tracking-tight">
+                  E-CLINIC
+                </span>
               </div>
-              <nav className="hidden lg:flex gap-1">
+              <div className="h-8 w-px bg-slate-200 hidden md:block"></div>
+              <div className="hidden md:flex flex-col">
+                <span className="text-sm font-bold text-slate-700 max-w-[200px] truncate">{clinicProfile.clinicName}</span>
+                <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">{clinicProfile.city}</span>
+              </div>
+              <nav className="hidden lg:flex gap-1 ml-4">
                 {[
                   { id: "dashboard", label: t.dashboard, icon: BarChart3 },
                   { id: "profile", label: "Profile", icon: Building2 },
@@ -514,6 +520,14 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
                   </Button>
                 ))}
               </nav>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="w-6 h-6" />
+              </Button>
             </div>
             <div className="flex items-center gap-3">
               {/* Language Toggle */}
@@ -570,6 +584,69 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
             </div>
           </div>
         </div>
+
+        {/* Mobile Sidebar */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-[60] lg:hidden">
+            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+            <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl flex flex-col p-6 animate-in slide-in-from-left duration-300">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-pink-500 flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-white fill-white" />
+                  </div>
+                  <span className="font-bold text-slate-900">E-CLINIC</span>
+                </div>
+                <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)}>
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+
+              <div className="space-y-2">
+                {[
+                  { id: "dashboard", label: t.dashboard, icon: BarChart3 },
+                  { id: "profile", label: "Profile", icon: Building2 },
+                  { id: "doctors", label: t.doctors, icon: Stethoscope },
+                  { id: "patients", label: t.patients, icon: Users },
+                  { id: "appointments", label: t.appointments, icon: Calendar },
+                  { id: "billing", label: t.billing, icon: Receipt }
+                ].map(tab => (
+                  <Button
+                    key={tab.id}
+                    variant={activeTab === tab.id ? "secondary" : "ghost"}
+                    className="w-full justify-start text-sm"
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setSidebarOpen(false);
+                    }}
+                  >
+                    <tab.icon className="w-4 h-4 mr-3" />
+                    {tab.label}
+                  </Button>
+                ))}
+              </div>
+
+              <div className="mt-auto space-y-4">
+                <div className="p-3 bg-slate-50 rounded-xl">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={clinicProfile.logo} />
+                      <AvatarFallback>C</AvatarFallback>
+                    </Avatar>
+                    <div className="overflow-hidden">
+                      <p className="text-xs font-bold truncate">{user.name}</p>
+                      <p className="text-[10px] text-muted-foreground">Admin</p>
+                    </div>
+                  </div>
+                  <Button variant="ghost" className="w-full justify-start text-xs h-8 text-red-600 hover:text-red-700 hover:bg-red-50" onClick={onLogout}>
+                    <LogOut className="w-3 h-3 mr-2" />
+                    Logout
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -817,9 +894,9 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
                         </div>
                         <Badge className={
                           apt.status === "Completed" ? "bg-green-600" :
-                          apt.status === "In Progress" ? "bg-blue-600" :
-                          apt.status === "Waiting" ? "bg-orange-600" :
-                          "bg-gray-600"
+                            apt.status === "In Progress" ? "bg-blue-600" :
+                              apt.status === "Waiting" ? "bg-orange-600" :
+                                "bg-gray-600"
                         }>
                           {apt.status}
                         </Badge>
@@ -897,7 +974,7 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
                     </div>
                     <h3 className="text-xl mb-1">{clinicProfile.clinicName}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{clinicProfile.tagline}</p>
-                    
+
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
@@ -1116,7 +1193,425 @@ export function ClinicDashboard({ user, onLogout }: ClinicDashboardProps) {
             </Card>
           </div>
         )}
+        {/* Doctors Tab */}
+        {activeTab === "doctors" && (
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-400">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl mb-1">{t.doctors}</h1>
+                <p className="text-muted-foreground">Manage your clinic's medical staff</p>
+              </div>
+              <Button className="bg-pink-500 hover:bg-pink-600">
+                <Plus className="w-4 h-4 mr-2" />
+                Add New Doctor
+              </Button>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  className="pl-10"
+                  placeholder="Search by name, specialty, or MCI number..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <Button variant="outline" className="flex items-center gap-2">
+                <Filter className="w-4 h-4 text-muted-foreground" />
+                Filter
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {doctors.filter(doc =>
+                doc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                doc.specialty.toLowerCase().includes(searchQuery.toLowerCase())
+              ).map((doctor) => (
+                <Card key={doctor.id} className="p-6 hover:shadow-lg transition-all border-slate-100 group">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-4">
+                      <Avatar className="w-16 h-16 ring-2 ring-pink-50 group-hover:ring-pink-200 transition-all">
+                        <AvatarImage src={doctor.avatar} alt={doctor.name} />
+                        <AvatarFallback>{doctor.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">{doctor.name}</h3>
+                        <p className="text-sm font-medium text-pink-600">{doctor.specialty}</p>
+                        <div className="flex items-center gap-1 mt-1">
+                          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                          <span className="text-xs font-bold text-slate-600">{doctor.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <Badge className={doctor.status === "Active" ? "bg-green-500" : "bg-slate-400"}>
+                      {doctor.status}
+                    </Badge>
+                  </div>
+
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-3 text-sm text-slate-600">
+                      <div className="w-5 h-5 flex items-center justify-center rounded bg-slate-100">
+                        <Award className="w-3 h-3" />
+                      </div>
+                      {doctor.qualification}
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-slate-600">
+                      <div className="w-5 h-5 flex items-center justify-center rounded bg-slate-100">
+                        <Clock className="w-3 h-3" />
+                      </div>
+                      {doctor.experience} experience
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-slate-600">
+                      <div className="w-5 h-5 flex items-center justify-center rounded bg-slate-100">
+                        <Phone className="w-3 h-3" />
+                      </div>
+                      {doctor.phone}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-50 flex items-center gap-2">
+                    <Button variant="outline" size="sm" className="flex-1 text-xs h-9">
+                      <Eye className="w-3.5 h-3.5 mr-1.5" />
+                      View Profile
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-blue-600 hover:bg-blue-50">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-red-600 hover:bg-red-50">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Patients Tab */}
+        {activeTab === "patients" && (
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-400">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl mb-1">{t.patients}</h1>
+                <p className="text-muted-foreground">Manage and track your registered patients</p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline">
+                  <Download className="w-4 h-4 mr-2" />
+                  Export Data
+                </Button>
+                <Button className="bg-pink-500 hover:bg-pink-600 text-white">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Register Patient
+                </Button>
+              </div>
+            </div>
+
+            <Card className="p-4 border-slate-100">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    className="pl-10 h-11"
+                    placeholder="Search by name, contact, or ABHA ID..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Select defaultValue="all">
+                    <SelectTrigger className="w-[140px] h-11">
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Status</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="inactive">Inactive</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline" size="icon" className="h-11 w-11">
+                    <Filter className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            <div className="space-y-4">
+              {filteredPatients.map((patient) => (
+                <Card key={patient.id} className="p-5 hover:shadow-md transition-all border-slate-100 group">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <Avatar className="w-12 h-12">
+                        <AvatarImage src={patient.avatar} />
+                        <AvatarFallback>{patient.name.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-bold text-slate-900">{patient.name}</h3>
+                          <Badge variant="outline" className="text-[10px] uppercase font-bold text-pink-600 border-pink-100 bg-pink-50">
+                            {patient.bloodGroup}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
+                          ID: {patient.abhaId} • {patient.gender}, {patient.age}y
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 flex-1 lg:mx-8">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-1">Contact</p>
+                        <p className="text-sm font-medium">{patient.contact}</p>
+                      </div>
+                      <div className="hidden sm:block">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-1">Last Visit</p>
+                        <p className="text-sm font-medium">{patient.lastVisit}</p>
+                      </div>
+                      <div className="hidden sm:block">
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-1">Diagnosis</p>
+                        <p className="text-sm font-medium truncate max-w-[120px]">{patient.diagnosis}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-1">Visits</p>
+                        <p className="text-sm font-medium">{patient.totalVisits} times</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm" className="h-9">
+                        <FileText className="w-3.5 h-3.5 mr-1.5" />
+                        Records
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-pink-600">
+                        <Calendar className="w-4 h-4" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-9 w-9 text-slate-400 hover:text-slate-900">
+                        <MoreVertical className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+        {/* Appointments Tab */}
+        {activeTab === "appointments" && (
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-400">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl mb-1">{t.appointments}</h1>
+                <p className="text-muted-foreground">Monitor and schedule clinic appointments</p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" className="hidden sm:flex">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Calendar View
+                </Button>
+                <Button className="bg-pink-500 hover:bg-pink-600">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Book Appointment
+                </Button>
+              </div>
+            </div>
+
+            <Tabs defaultValue="upcoming" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 mb-6 bg-slate-100/50 p-1">
+                <TabsTrigger value="today">Today</TabsTrigger>
+                <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
+                <TabsTrigger value="past">Past History</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="upcoming" className="space-y-4">
+                <Card className="p-4 border-slate-100 flex flex-col md:flex-row gap-4 items-center">
+                  <div className="relative flex-1 w-full">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input className="pl-10" placeholder="Search appointments..." />
+                  </div>
+                  <div className="flex gap-2 w-full md:w-auto">
+                    <Select defaultValue="all">
+                      <SelectTrigger className="w-full md:w-[150px]">
+                        <SelectValue placeholder="Department" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Depts</SelectItem>
+                        <SelectItem value="cardio">Cardiology</SelectItem>
+                        <SelectItem value="ortho">Orthopedics</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </Card>
+
+                <div className="space-y-4">
+                  {todayAppointments.map((apt) => (
+                    <Card key={apt.id} className="p-5 hover:shadow-md transition-all border-slate-100">
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">
+                            {apt.tokenNumber}
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-slate-900">{apt.patient}</h3>
+                            <p className="text-xs text-muted-foreground">{apt.doctor} • {apt.department}</p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 flex-1 lg:mx-8">
+                          <div>
+                            <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1">Time & Type</p>
+                            <div className="flex items-center gap-2 text-sm font-medium">
+                              <Clock className="w-3.5 h-3.5 text-pink-500" />
+                              {apt.time}
+                              <Badge variant="outline" className="text-[9px] h-4">{apt.type}</Badge>
+                            </div>
+                          </div>
+                          <div className="hidden md:block">
+                            <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1">Payment</p>
+                            <p className="text-sm font-medium">₹{apt.fee} • <span className={apt.paymentStatus === "Paid" ? "text-green-600" : "text-amber-600"}>{apt.paymentStatus}</span></p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1">Status</p>
+                            <Badge className={
+                              apt.status === "Completed" ? "bg-green-500" :
+                                apt.status === "In Progress" ? "bg-blue-500" :
+                                  "bg-slate-500"
+                            }>
+                              {apt.status}
+                            </Badge>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <Button variant="outline" size="sm" className="h-9">Reschedule</Button>
+                          <Button variant="ghost" size="icon" className="h-9 w-9 text-red-500 hover:bg-red-50">
+                            <XCircle className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        )}
+
+        {/* Billing Tab */}
+        {activeTab === "billing" && (
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-400">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl mb-1">{t.billing}</h1>
+                <p className="text-muted-foreground">Manage invoices, payments, and financial reports</p>
+              </div>
+              <Button onClick={() => setShowBillingForm(true)} className="bg-pink-500 hover:bg-pink-600">
+                <Plus className="w-4 h-4 mr-2" />
+                Create New Invoice
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="p-6 bg-gradient-to-br from-pink-500 to-pink-600 text-white">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <Badge className="bg-white/20 text-white border-0">Monthly</Badge>
+                </div>
+                <p className="text-pink-100 text-sm font-medium">Total Revenue</p>
+                <h3 className="text-3xl font-bold mt-1">₹{(overviewStats.monthlyRevenue / 100000).toFixed(1)}L</h3>
+                <p className="text-xs text-pink-100 mt-2 flex items-center gap-1">
+                  <TrendingUp className="w-3 h-3" />
+                  +{overviewStats.revenueGrowth}% from last month
+                </p>
+              </Card>
+
+              <Card className="p-6 border-slate-100">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-2 bg-amber-50 rounded-lg">
+                    <Clock className="w-6 h-6 text-amber-600" />
+                  </div>
+                </div>
+                <p className="text-muted-foreground text-sm font-medium">Pending Payments</p>
+                <h3 className="text-3xl font-bold mt-1 text-slate-900">₹45,200</h3>
+                <p className="text-xs text-amber-600 mt-2 font-medium">12 invoices pending</p>
+              </Card>
+
+              <Card className="p-6 border-slate-100 text-center flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 transition-all border-dashed border-2">
+                <div className="p-3 bg-pink-100 rounded-full mb-3">
+                  <FileText className="w-6 h-6 text-pink-600" />
+                </div>
+                <p className="font-bold text-slate-900">Financial Reports</p>
+                <p className="text-xs text-muted-foreground mt-1">Download monthly GST & Tax reports</p>
+              </Card>
+            </div>
+
+            <Card className="border-slate-100 overflow-hidden">
+              <div className="p-6 border-b border-slate-50 bg-slate-50/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h3 className="font-bold text-slate-900">Recent Transactions</h3>
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+                    <Input className="h-9 pl-9 w-full md:w-[200px] text-xs" placeholder="Search invoice..." />
+                  </div>
+                  <Button variant="outline" size="sm" className="h-9">
+                    <Filter className="w-3.5 h-3.5 mr-1.5" />
+                    Filter
+                  </Button>
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-slate-100 text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
+                      <th className="px-6 py-4">Invoice No</th>
+                      <th className="px-6 py-4">Patient</th>
+                      <th className="px-6 py-4">Date</th>
+                      <th className="px-6 py-4">Amount</th>
+                      <th className="px-6 py-4">Status</th>
+                      <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {billingTransactions.map((tx) => (
+                      <tr key={tx.id} className="hover:bg-slate-50/50 transition-all">
+                        <td className="px-6 py-4 text-sm font-bold text-pink-600">{tx.invoiceNo}</td>
+                        <td className="px-6 py-4 text-sm font-medium text-slate-900">{tx.patient}</td>
+                        <td className="px-6 py-4 text-sm text-slate-600">{tx.date}</td>
+                        <td className="px-6 py-4 text-sm font-bold text-slate-900">₹{tx.total}</td>
+                        <td className="px-6 py-4">
+                          <Badge variant={tx.status === "Paid" ? "default" : "secondary"} className={tx.status === "Paid" ? "bg-green-500" : ""}>
+                            {tx.status}
+                          </Badge>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Printer className="w-4 h-4 text-slate-400" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Download className="w-4 h-4 text-slate-400" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <MoreVertical className="w-4 h-4 text-slate-400" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="p-4 border-t border-slate-50 text-center">
+                <Button variant="link" className="text-pink-600 font-bold hover:no-underline">View All Billing History</Button>
+              </div>
+            </Card>
+          </div>
+        )}
       </main>
     </div>
   );
 }
+
+
