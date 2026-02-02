@@ -35,6 +35,15 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => { document.body.style.overflow = "unset"; };
+  }, [mobileMenuOpen]);
+
   const mainMenuItems = [
     { label: "Home", view: "home" as PageView },
     { label: "Features", view: "features" as PageView },
@@ -53,10 +62,12 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
-        ? "glass border-b border-border/40 py-2"
-        : "bg-transparent border-b border-transparent py-4"
-        }`}
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300 w-full",
+        scrolled || mobileMenuOpen
+          ? "bg-white dark:bg-slate-950 border-b border-border shadow-sm py-2"
+          : "bg-transparent border-b border-transparent py-4"
+      )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -153,60 +164,91 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0, activeView
         </div>
       </div>
 
-      {/* Simplified Mobile Menu Dropdown */}
+      {/* Refined Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-background/98 backdrop-blur-xl border-t border-border shadow-2xl animate-in slide-in-from-top-2 duration-300 overflow-y-auto max-h-[80vh]">
-          <div className="p-4 space-y-2">
-            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-border mb-4">
-              <span className="text-xs font-bold text-muted-foreground">Appearance</span>
-              <ThemeToggle />
-            </div>
-
-            {mainMenuItems.map((item) => (
-              <button
-                key={item.view}
-                onClick={() => {
-                  onNavigate(item.view);
-                  setMobileMenuOpen(false);
-                }}
-                className={cn(
-                  "flex items-center justify-between w-full p-4 rounded-xl font-bold text-sm transition-all",
-                  activeView === item.view
-                    ? "bg-pink-50 dark:bg-pink-900/10 text-pink-600"
-                    : "text-foreground hover:bg-slate-50 dark:hover:bg-slate-900"
-                )}
-              >
-                {item.label}
-                <ChevronRight className={cn("w-4 h-4", activeView === item.view ? "text-pink-600" : "text-muted-foreground")} />
-              </button>
-            ))}
-
-            <div className="grid grid-cols-2 gap-2 pt-4 border-t border-border mt-4">
-              {categoryItems.map((item) => (
+        <div className="lg:hidden fixed inset-0 z-50 bg-white dark:bg-slate-950 flex flex-col p-6 animate-in fade-in slide-in-from-right duration-300 mt-[60px] h-[calc(100vh-60px)]">
+          <div className="flex-1 overflow-y-auto">
+            <div className="flex flex-col gap-2 mb-8">
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-2 ml-4">Main Menu</p>
+              {mainMenuItems.map((item) => (
                 <button
                   key={item.view}
                   onClick={() => {
                     onNavigate(item.view);
                     setMobileMenuOpen(false);
                   }}
-                  className="flex flex-col items-start gap-2 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/30 border border-border hover:border-pink-500/50 transition-all group"
+                  className={cn(
+                    "flex items-center justify-between w-full p-4 rounded-2xl font-bold text-sm transition-all",
+                    activeView === item.view
+                      ? "bg-pink-500 text-white shadow-lg shadow-pink-200 dark:shadow-pink-900/20"
+                      : "text-foreground hover:bg-slate-100 dark:hover:bg-slate-900"
+                  )}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-500">
-                    <item.icon className="w-4 h-4" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">
-                    {item.label}
-                  </span>
+                  {item.label}
+                  <ChevronRight className={cn("w-4 h-4", activeView === item.view ? "text-white" : "text-muted-foreground")} />
                 </button>
               ))}
+              <button
+                onClick={() => {
+                  onNavigate("contact");
+                  setMobileMenuOpen(false);
+                }}
+                className={cn(
+                  "flex items-center justify-between w-full p-4 rounded-2xl font-bold text-sm transition-all",
+                  activeView === "contact"
+                    ? "bg-pink-500 text-white shadow-lg shadow-pink-200 dark:shadow-pink-900/20"
+                    : "text-foreground hover:bg-slate-100 dark:hover:bg-slate-900"
+                )}
+              >
+                Contact
+                <ChevronRight className={cn("w-4 h-4", activeView === "contact" ? "text-white" : "text-muted-foreground")} />
+              </button>
             </div>
 
-            <Button
-              className="w-full h-12 mt-6 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold"
-              onClick={() => { onGetStarted && onGetStarted(); setMobileMenuOpen(false); }}
-            >
-              Get Started
-            </Button>
+            <div className="space-y-4">
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-2 ml-4">Quick Links</p>
+              <div className="grid grid-cols-2 gap-3">
+                {categoryItems.map((item) => (
+                  <button
+                    key={item.view}
+                    onClick={() => {
+                      onNavigate(item.view);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-border hover:border-pink-500 transition-all text-center"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-500">
+                      <item.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-foreground">
+                      {item.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 mt-8 pb-8">
+              <Button
+                variant="outline"
+                className="w-full h-14 rounded-2xl font-bold border-2"
+                onClick={() => {
+                  onNavigate("login");
+                  setMobileMenuOpen(false);
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                className="w-full h-14 rounded-2xl bg-pink-500 hover:bg-pink-600 text-white font-bold shadow-lg shadow-pink-200 dark:shadow-pink-900/20 text-lg"
+                onClick={() => {
+                  onGetStarted && onGetStarted();
+                  setMobileMenuOpen(false);
+                }}
+              >
+                Get Started Now
+              </Button>
+            </div>
           </div>
         </div>
       )}
