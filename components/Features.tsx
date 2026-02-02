@@ -90,8 +90,8 @@ export function Features({ onNavigate }: FeaturesProps) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-pink-500/30">
-            <Navigation onNavigate={onNavigate} />
+        <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 selection:bg-pink-500/30 selection:text-white transition-colors duration-500">
+            <Navigation onNavigate={onNavigate} activeView="features" />
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-24 overflow-hidden">
@@ -101,7 +101,7 @@ export function Features({ onNavigate }: FeaturesProps) {
                     <Badge className="mb-6 px-6 py-2 bg-pink-500/10 text-pink-400 border-pink-500/20 rounded-full font-bold tracking-widest uppercase text-xs">
                         Unified Healthcare OS
                     </Badge>
-                    <h1 className="text-4xl md:text-8xl font-black mb-8 tracking-tighter leading-[1.1] text-white px-2">
+                    <h1 className="text-4xl md:text-8xl font-black mb-8 tracking-tighter leading-[1.1] text-slate-900 dark:text-white px-2">
                         Everything for <br /> <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent italic">Modern Care.</span>
                     </h1>
                     <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium px-4">
@@ -114,13 +114,13 @@ export function Features({ onNavigate }: FeaturesProps) {
             <section className="py-24 max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Main Large Card */}
-                    <Card className="md:col-span-2 md:row-span-2 p-6 md:p-12 bg-slate-900/50 border-white/5 relative overflow-hidden group rounded-[2.5rem]">
+                    <Card className="md:col-span-2 md:row-span-2 p-6 md:p-12 bg-slate-50/50 dark:bg-slate-900/50 border-slate-200 dark:border-white/5 relative overflow-hidden group rounded-[2.5rem] shadow-sm">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] -z-10 group-hover:bg-pink-500/20 transition-colors duration-700"></div>
                         <div className="relative z-10 flex flex-col h-full">
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-400 flex items-center justify-center text-white mb-10 shadow-xl shadow-pink-500/20">
                                 <BrainCircuit className="w-8 h-8" />
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">Proactive <br /> Core Engine</h2>
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">Proactive <br /> Core Engine</h2>
                             <p className="text-lg text-slate-400 leading-relaxed max-w-md mb-12">
                                 Our infrastructure isn't just a database—it's an intelligent layer that sits between all modules, ensuring data flows securely and provides value at every touchpoint.
                             </p>
@@ -138,7 +138,7 @@ export function Features({ onNavigate }: FeaturesProps) {
                         </div>
                         {/* Abstract UI Elements */}
                         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 p-8 hidden lg:block">
-                            <div className="w-full h-full bg-slate-950/80 rounded-3xl border border-white/10 p-6 flex flex-col gap-4 animate-float">
+                            <div className="w-full h-full bg-white/80 dark:bg-slate-950/80 rounded-3xl border border-slate-200 dark:border-white/10 p-6 flex flex-col gap-4 animate-float shadow-xl">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
                                     <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Network_Stability: Optimal</div>
@@ -156,14 +156,14 @@ export function Features({ onNavigate }: FeaturesProps) {
 
                     {/* Individual Module Cards */}
                     {coreModules.map((module) => (
-                        <Card key={module.id} className="p-8 bg-slate-900/40 border-white/5 hover:border-pink-500/30 transition-all duration-500 group rounded-[2rem] flex flex-col">
+                        <Card key={module.id} className="p-8 bg-slate-50/40 dark:bg-slate-900/40 border-slate-200 dark:border-white/5 hover:border-pink-500/30 transition-all duration-500 group rounded-[2rem] flex flex-col shadow-sm hover:shadow-xl dark:shadow-none hover:-translate-y-1">
                             <div className={cn(
                                 "w-12 h-12 rounded-xl flex items-center justify-center text-white mb-8 bg-gradient-to-br transition-transform group-hover:scale-110 duration-500",
                                 module.gradient
                             )}>
                                 <module.icon className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-black text-white mb-3 tracking-tight">{module.title}</h3>
+                            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">{module.title}</h3>
                             <p className="text-sm text-slate-400 mb-8 leading-relaxed line-clamp-3">
                                 {module.description}
                             </p>
@@ -178,11 +178,11 @@ export function Features({ onNavigate }: FeaturesProps) {
             </section>
 
             {/* Role-Based Benefits */}
-            <section className="py-32 bg-slate-900/20">
+            <section className="py-32 bg-slate-50/50 dark:bg-slate-900/20">
                 <div className="max-w-7xl mx-auto px-4 text-center">
-                    <h2 className="text-4xl md:text-5xl font-black text-white mb-16 tracking-tight">Tailored Experience</h2>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16 tracking-tight">Tailored Experience</h2>
 
-                    <div className="inline-flex p-2 bg-slate-900 border border-white/5 rounded-2xl mb-20">
+                    <div className="inline-flex p-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-2xl mb-20 shadow-sm">
                         {[
                             { id: "patient", icon: User, label: "Patients" },
                             { id: "doctor", icon: Stethoscope, label: "Doctors" },
@@ -204,12 +204,12 @@ export function Features({ onNavigate }: FeaturesProps) {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {roleBenefits[activeRole].map((benefit, i) => (
-                            <div key={i} className="text-left p-10 bg-slate-900 rounded-[2.5rem] border border-white/5 hover:border-pink-500/20 transition-colors animate-fade-in group">
-                                <div className="w-14 h-14 rounded-2xl bg-slate-950 flex items-center justify-center text-pink-500 mb-8 group-hover:scale-110 transition-transform">
+                            <div key={i} className="text-left p-10 bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-white/5 hover:border-pink-500/20 transition-all duration-500 animate-fade-in group shadow-sm hover:shadow-xl dark:shadow-none">
+                                <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-950 flex items-center justify-center text-pink-500 mb-8 group-hover:scale-110 transition-transform">
                                     <benefit.icon className="w-7 h-7" />
                                 </div>
-                                <h4 className="text-xl font-black text-white mb-4 uppercase tracking-tight">{benefit.title}</h4>
-                                <p className="text-slate-400 font-medium leading-relaxed">{benefit.desc}</p>
+                                <h4 className="text-xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">{benefit.title}</h4>
+                                <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{benefit.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -218,18 +218,18 @@ export function Features({ onNavigate }: FeaturesProps) {
 
             {/* Trust & Verification */}
             <section className="py-24 max-w-7xl mx-auto px-4">
-                <div className="bg-gradient-to-br from-slate-900/80 to-slate-950 p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-white/10 relative overflow-hidden">
+                <div className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900/80 dark:to-slate-950 p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-slate-200 dark:border-white/10 relative overflow-hidden shadow-2xl dark:shadow-none">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-30"></div>
 
                     <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
                         <div className="flex-1 space-y-8">
-                            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">Secure by Design. <br /> Private by Default.</h2>
-                            <p className="text-lg text-slate-400 font-medium leading-relaxed">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">Secure by Design. <br /> Private by Default.</h2>
+                            <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                                 We believe healthcare data is sacred. That's why every byte of information in our ecosystem is encrypted and stored according to global HIPAA and GDPR standards.
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 {["HIPAA COMPLIANT", "GDPR READY", "ISO 27001", "BLOCKCHAIN SECURED"].map((cert) => (
-                                    <Badge key={cert} className="px-4 py-2 bg-white/5 text-slate-400 border-white/10 rounded-lg text-[10px] font-black tracking-[0.2em]">
+                                    <Badge key={cert} className="px-4 py-2 bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/10 rounded-lg text-[10px] font-black tracking-[0.2em]">
                                         {cert}
                                     </Badge>
                                 ))}
@@ -243,10 +243,10 @@ export function Features({ onNavigate }: FeaturesProps) {
                                 { title: "Instant Transfer", desc: "Move your records safely" },
                                 { title: "Verified Hub", desc: "All providers are audited" }
                             ].map((item, i) => (
-                                <div key={i} className="p-6 bg-slate-950/50 rounded-3xl border border-white/5">
+                                <div key={i} className="p-6 bg-white dark:bg-slate-950/50 rounded-3xl border border-slate-100 dark:border-white/5 shadow-sm">
                                     <CheckCircle2 className="w-5 h-5 text-pink-500 mb-4" />
-                                    <h5 className="font-black text-white mb-1 uppercase text-sm tracking-tight">{item.title}</h5>
-                                    <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                    <h5 className="font-black text-slate-900 dark:text-white mb-1 uppercase text-sm tracking-tight">{item.title}</h5>
+                                    <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">{item.desc}</p>
                                 </div>
                             ))}
                         </div>
@@ -257,7 +257,7 @@ export function Features({ onNavigate }: FeaturesProps) {
             {/* CTA Section */}
             <section className="py-24 max-w-7xl mx-auto px-4 text-center">
                 <div className="space-y-8">
-                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">Ready to evolve?</h2>
+                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter leading-tight">Ready to evolve?</h2>
                     <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Join the decentralized healthcare revolution today.</p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 pt-8">
                         <Button

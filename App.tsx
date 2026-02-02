@@ -3,15 +3,12 @@ import { CartProvider } from "./contexts/CartContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Toaster } from "./components/ui/sonner";
 import { Home } from "./components/Home";
-import { Login } from "./components/Login";
 import { LoginWithOTP } from "./components/LoginWithOTP";
 import { ClinicRegistration } from "./components/ClinicRegistration";
 import { DoctorRegistration } from "./components/DoctorRegistration";
-import { PatientDashboard } from "./components/PatientDashboard";
 import { PatientDashboardNew } from "./components/PatientDashboardNew";
 import { DoctorDashboard } from "./components/DoctorDashboard";
 import { ClinicDashboard } from "./components/ClinicDashboard";
-import ClinicModuleComplete from "./components/ClinicModuleComplete";
 import { Features } from "./components/Features";
 import { HowItWorks } from "./components/HowItWorks";
 import { Pricing } from "./components/Pricing";
@@ -77,90 +74,94 @@ export default function App() {
     setCurrentView("login");
   };
 
-  const renderView = () => {
-    if (currentView === "home") {
-      return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "login") {
-      return <LoginWithOTP onLogin={handleLogin} onBack={() => setCurrentView("home")} onRegister={handleRegister} />;
-    }
-
-    if (currentView === "register-clinic") {
-      return <ClinicRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
-    }
-
-    if (currentView === "register-doctor") {
-      return <DoctorRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
-    }
-
-    if (currentView === "cart") {
-      return <CartPage onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
-    }
-
-    if (currentView === "features") {
-      return <Features onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "how-it-works") {
-      return <HowItWorks onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "pricing") {
-      return <Pricing onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "ai-features") {
-      return <AIFeatures onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "medicine") {
-      return <Medicine onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
-    }
-
-    if (currentView === "healthcare") {
-      return <Healthcare onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "doctor-consult") {
-      return <DoctorConsult onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "lab-tests") {
-      return <LabTests onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "plus") {
-      return <Plus onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "health-insights") {
-      return <HealthInsights onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "offers") {
-      return <Offers onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "contact") {
-      return <Contact onNavigate={navigateTo} />;
-    }
-
-    if (currentView === "dashboard" && user) {
-      switch (user.role) {
-        case "patient":
-          return <PatientDashboardNew user={user} onLogout={handleLogout} />;
-        case "doctor":
-          return <DoctorDashboard user={user} onLogout={handleLogout} />;
-        case "clinic":
-          return <ClinicDashboard user={user} onLogout={handleLogout} />;
-        default:
+  const viewContent = (
+    <div key={currentView} className="animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+      {(() => {
+        if (currentView === "home") {
           return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
-      }
-    }
+        }
 
-    return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
-  };
+        if (currentView === "login") {
+          return <LoginWithOTP onLogin={handleLogin} onBack={() => setCurrentView("home")} onRegister={handleRegister} />;
+        }
+
+        if (currentView === "register-clinic") {
+          return <ClinicRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
+        }
+
+        if (currentView === "register-doctor") {
+          return <DoctorRegistration onComplete={handleRegistrationComplete} onBack={() => setCurrentView("login")} />;
+        }
+
+        if (currentView === "cart") {
+          return <CartPage onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
+        }
+
+        if (currentView === "features") {
+          return <Features onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "how-it-works") {
+          return <HowItWorks onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "pricing") {
+          return <Pricing onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "ai-features") {
+          return <AIFeatures onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "medicine") {
+          return <Medicine onNavigate={navigateTo} user={user} onLoginRequired={handleLoginRequired} />;
+        }
+
+        if (currentView === "healthcare") {
+          return <Healthcare onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "doctor-consult") {
+          return <DoctorConsult onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "lab-tests") {
+          return <LabTests onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "plus") {
+          return <Plus onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "health-insights") {
+          return <HealthInsights onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "offers") {
+          return <Offers onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "contact") {
+          return <Contact onNavigate={navigateTo} />;
+        }
+
+        if (currentView === "dashboard" && user) {
+          switch (user.role) {
+            case "patient":
+              return <PatientDashboardNew user={user} onLogout={handleLogout} />;
+            case "doctor":
+              return <DoctorDashboard user={user} onLogout={handleLogout} />;
+            case "clinic":
+              return <ClinicDashboard user={user} onLogout={handleLogout} />;
+            default:
+              return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
+          }
+        }
+
+        return <Home onGetStarted={() => setCurrentView("login")} onNavigate={navigateTo} />;
+      })()}
+    </div>
+  );
 
   // Views that should be full width (not constrained by max-w-6xl)
   const fullWidthViews: PageView[] = ["home", "features", "how-it-works", "pricing", "ai-features", "contact", "medicine", "healthcare"];
@@ -172,11 +173,11 @@ export default function App() {
         <CartProvider>
           {isFullWidth ? (
             <main>
-              {renderView()}
+              {viewContent}
             </main>
           ) : (
             <main className="max-w-6xl mx-auto px-4 py-8">
-              {renderView()}
+              {viewContent}
             </main>
           )}
           <Toaster />

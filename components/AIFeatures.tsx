@@ -75,7 +75,7 @@ export function AIFeaturesEnhanced({ onNavigate }: AIFeaturesEnhancedProps) {
 
     return (
         <div className="min-h-screen bg-white dark:bg-slate-950 font-sans transition-colors duration-300 selection:bg-pink-100 dark:selection:bg-pink-900/30">
-            <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} />
+            <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} activeView="ai-features" />
 
             {/* Futuristic Hero Section */}
             <section className="relative pt-32 pb-24 overflow-hidden">

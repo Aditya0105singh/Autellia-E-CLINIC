@@ -201,7 +201,7 @@ export function MedicineEnhanced({ onNavigate, user, onLoginRequired }: Medicine
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 font-sans transition-colors duration-300 selection:bg-pink-100 dark:selection:bg-pink-900/30">
-      <Navigation onNavigate={onNavigate} cartCount={getItemCount()} onGetStarted={() => onNavigate("login")} />
+      <Navigation onNavigate={onNavigate} cartCount={getItemCount()} onGetStarted={() => onNavigate("login")} activeView="medicine" />
 
       {/* Premium Hero Section */}
       <section className="relative pt-32 pb-48 overflow-hidden bg-slate-900">

@@ -58,7 +58,7 @@ export function HowItWorks({ onNavigate }: HowItWorksProps) {
 
   return (
     <div className="min-h-screen bg-background font-sans">
-      <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} />
+      <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} activeView="how-it-works" />
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-20 overflow-hidden bg-pink-50/50 dark:bg-slate-950/20">

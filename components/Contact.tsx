@@ -28,7 +28,7 @@ export function Contact({ onNavigate }: ContactProps) {
 
   return (
     <div className="min-h-screen bg-background font-sans">
-      <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} />
+      <Navigation onNavigate={onNavigate} onGetStarted={() => onNavigate("login")} activeView="contact" />
 
       {/* Hero Section */}
       <section className="relative bg-pink-50/50 dark:bg-slate-950/20 py-24 overflow-hidden border-b border-pink-100 dark:border-pink-900/30">

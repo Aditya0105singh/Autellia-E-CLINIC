@@ -84,7 +84,7 @@ export function Home({ onGetStarted, onNavigate }: HomeProps) {
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-pink-500/30 selection:text-pink-600">
-      <Navigation onGetStarted={onGetStarted} onNavigate={onNavigate} />
+      <Navigation onGetStarted={onGetStarted} onNavigate={onNavigate} activeView="home" />
 
       {/* Hero Section */}
       <section className="relative pt-12 pb-24 overflow-hidden">
