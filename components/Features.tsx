@@ -10,7 +10,7 @@ import {
     ShoppingBag,
     Cloud,
     Users,
-    UserRound,
+    User,
     Building2,
     Stethoscope,
     ArrowRight,
@@ -184,7 +184,7 @@ export function Features({ onNavigate }: FeaturesProps) {
 
                     <div className="inline-flex p-2 bg-slate-900 border border-white/5 rounded-2xl mb-20">
                         {[
-                            { id: "patient", icon: UserRound, label: "Patients" },
+                            { id: "patient", icon: User, label: "Patients" },
                             { id: "doctor", icon: Stethoscope, label: "Doctors" },
                             { id: "clinic", icon: Building2, label: "Clinics" }
                         ].map((role) => (
