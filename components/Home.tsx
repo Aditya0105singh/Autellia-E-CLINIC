@@ -116,16 +116,16 @@ export function Home({ onGetStarted, onNavigate }: HomeProps) {
               </Button>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-90">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-8 pt-8 opacity-90">
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map(i => <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />)}
               </div>
               <div className="text-sm font-medium text-muted-foreground">
                 <span className="font-bold text-foreground">1000+ doctors</span> trust us
               </div>
-              <div className="h-8 w-px bg-border mx-2"></div>
-              <div className="text-sm font-medium text-muted-foreground">
-                Available in <br /> <span className="font-bold text-foreground">English & Hindi</span>
+              <div className="hidden sm:block h-8 w-px bg-border mx-2"></div>
+              <div className="text-sm font-medium text-muted-foreground w-full sm:w-auto">
+                Available in <span className="font-bold text-foreground">English & Hindi</span>
               </div>
             </div>
           </div>

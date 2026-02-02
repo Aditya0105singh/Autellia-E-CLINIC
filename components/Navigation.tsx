@@ -94,7 +94,7 @@ export function Navigation({ onNavigate, onGetStarted, cartCount = 0 }: Navigati
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
+            <div>
               <ThemeToggle />
             </div>
 

@@ -101,10 +101,10 @@ export function Features({ onNavigate }: FeaturesProps) {
                     <Badge className="mb-6 px-6 py-2 bg-pink-500/10 text-pink-400 border-pink-500/20 rounded-full font-bold tracking-widest uppercase text-xs">
                         Unified Healthcare OS
                     </Badge>
-                    <h1 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-none text-white">
+                    <h1 className="text-4xl md:text-8xl font-black mb-8 tracking-tighter leading-[1.1] text-white px-2">
                         Everything for <br /> <span className="bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent italic">Modern Care.</span>
                     </h1>
-                    <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium">
+                    <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium px-4">
                         Autellia is a comprehensive ecosystem that bridges the gap between patients, healthcare providers, and diagnostic centers using cutting-edge technology.
                     </p>
                 </div>
@@ -114,13 +114,13 @@ export function Features({ onNavigate }: FeaturesProps) {
             <section className="py-24 max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Main Large Card */}
-                    <Card className="md:col-span-2 md:row-span-2 p-12 bg-slate-900/50 border-white/5 relative overflow-hidden group rounded-[2.5rem]">
+                    <Card className="md:col-span-2 md:row-span-2 p-6 md:p-12 bg-slate-900/50 border-white/5 relative overflow-hidden group rounded-[2.5rem]">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] -z-10 group-hover:bg-pink-500/20 transition-colors duration-700"></div>
                         <div className="relative z-10 flex flex-col h-full">
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-400 flex items-center justify-center text-white mb-10 shadow-xl shadow-pink-500/20">
                                 <BrainCircuit className="w-8 h-8" />
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">Proactive <br /> Core Engine</h2>
+                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">Proactive <br /> Core Engine</h2>
                             <p className="text-lg text-slate-400 leading-relaxed max-w-md mb-12">
                                 Our infrastructure isn't just a database—it's an intelligent layer that sits between all modules, ensuring data flows securely and provides value at every touchpoint.
                             </p>
@@ -217,8 +217,8 @@ export function Features({ onNavigate }: FeaturesProps) {
             </section>
 
             {/* Trust & Verification */}
-            <section className="py-32 max-w-7xl mx-auto px-4">
-                <div className="bg-gradient-to-br from-slate-900/80 to-slate-950 p-12 md:p-20 rounded-[4rem] border border-white/10 relative overflow-hidden">
+            <section className="py-24 max-w-7xl mx-auto px-4">
+                <div className="bg-gradient-to-br from-slate-900/80 to-slate-950 p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-white/10 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent opacity-30"></div>
 
                     <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
@@ -257,12 +257,12 @@ export function Features({ onNavigate }: FeaturesProps) {
             {/* CTA Section */}
             <section className="py-24 max-w-7xl mx-auto px-4 text-center">
                 <div className="space-y-8">
-                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">Ready to evolve?</h2>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto">Join the decentralized healthcare revolution today.</p>
-                    <div className="flex justify-center gap-6 pt-8">
+                    <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">Ready to evolve?</h2>
+                    <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">Join the decentralized healthcare revolution today.</p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 pt-8">
                         <Button
                             size="lg"
-                            className="h-16 px-12 bg-pink-600 hover:bg-pink-700 text-white rounded-full font-black text-lg shadow-2xl shadow-pink-500/20 transition-all hover:scale-105"
+                            className="h-16 px-12 bg-pink-600 hover:bg-pink-700 text-white rounded-full font-black text-lg shadow-2xl shadow-pink-500/20 transition-all hover:scale-105 w-full sm:w-auto"
                             onClick={() => onNavigate("login")}
                         >
                             Get Started Free
@@ -270,7 +270,7 @@ export function Features({ onNavigate }: FeaturesProps) {
                         <Button
                             size="lg"
                             variant="outline"
-                            className="h-16 px-12 border-2 border-white/10 hover:bg-white/5 text-white rounded-full font-black text-lg transition-all"
+                            className="h-16 px-12 border-2 border-white/10 hover:bg-white/5 text-white rounded-full font-black text-lg transition-all w-full sm:w-auto"
                             onClick={() => onNavigate("how-it-works")}
                         >
                             Learn More

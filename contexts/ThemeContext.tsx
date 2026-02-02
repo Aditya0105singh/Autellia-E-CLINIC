@@ -12,26 +12,26 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage first, then system preference
+    // Check localStorage first
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme') as Theme | null;
       if (saved) return saved;
-      
-      const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return system ? 'dark' : 'light';
+
+      // Default to light regardless of system preference for new visitors
+      return 'light';
     }
     return 'light';
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-    
+
     // Save to localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
